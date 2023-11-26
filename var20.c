@@ -1,3 +1,4 @@
+#include <omp.h>
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -17,6 +18,7 @@ void verify();
 
 int main(int an, char **as)
 {
+    double start = omp_get_wtime();
 	int it;
 
 	init();
@@ -30,6 +32,8 @@ int main(int an, char **as)
 	}
 
 	verify();
+    double end = omp_get_wtime();
+    printf("Time = %f\n", end - start);
 
 	return 0;
 }

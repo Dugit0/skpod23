@@ -1,3 +1,4 @@
+#include <omp.h>
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -11,25 +12,9 @@ float eps;
 
 float A [N][N][N];
 
-void relax();
-void init();
-void verify(); 
-
-int main(int an, char **as) {
-    int it;
-	init();
-	for (it=1; it<=itmax; it++) {
-		eps = 0.;
-		relax();
-		printf( "it=%4i   eps=%f\n", it,eps);
-		if (eps < maxeps) {
-            break;
-        }
-	}
-	verify();
-	return 0;
-}
-
+/* void relax(); */
+/* void init(); */
+/* void verify();  */
 
 void init() { 
     for (i = 0; i <= N - 1; i++) {
@@ -64,7 +49,7 @@ void relax()
 
 void verify()
 { 
-	float s;
+	double s;
 
 	s = 0.;
 	for (i = 0; i <= N - 1; i++) {
@@ -77,3 +62,37 @@ void verify()
 	printf("  S = %f\n",s);
 
 }
+
+
+void printa() {
+    for (i = 0; i <= N - 1; i++) {
+        for (j = 0; j <= N - 1; j++) {
+	        for (k = 0; k <= N - 1; k++) {
+                printf("%f ", A[i][j][k]);
+            }
+        }
+    }
+    return;
+}
+
+
+int main(int an, char **as) {
+    double start = omp_get_wtime();
+    int it;
+	init();
+	for (it=1; it<=itmax; it++) {
+		eps = 0.;
+		relax();
+		printf( "it=%4i   eps=%f\n", it,eps);
+        
+		if (eps < maxeps) {
+            break;
+        }
+	}
+	verify();
+    double end = omp_get_wtime();
+    printf("Time = %f\n", end - start);
+	return 0;
+}
+
+
