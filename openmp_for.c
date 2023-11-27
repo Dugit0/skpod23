@@ -48,14 +48,44 @@ void init() {
 /*     } */
 /* } */
 
+
+
+/* void relax() */
+/* { */
+/*     #pragma omp parallel for collapse(3) default(none) \ */
+/* 		private(i, j, k) shared(A) reduction(max:eps) */
+/* 	for (i = 1; i <= N - 2; i++) */
+/* 		for (j = 1; j <= N - 2; j++) */
+/* 			for (k = 1; k <= N - 2; ++k) { */
+/* 				if ((k + i + j) % 2 == 1) { */
+/* 					double b; */
+/* 					b = ((A[i - 1][j][k] + A[i + 1][j][k] + A[i][j - 1][k] + A[i][j + 1][k] + A[i][j][k - 1] + A[i][j][k + 1]) / 6. - A[i][j][k]) / 2; */
+/* 					eps = Max(fabs(b), eps); */
+/* 					A[i][j][k] = A[i][j][k] + b; */
+/* 				} */
+/* 			} */
+/* 	 */
+/*     #pragma omp parallel for collapse(3) default(none) \ */
+/* 		private(i, j, k) shared(A) */
+/* 	for (i = 1; i <= N - 2; i++) */
+/* 		for (j = 1; j <= N - 2; j++) */
+/* 			for (k = 1; k <= N - 2; ++k) { */
+/* 				if ((k + i + j) % 2 == 0) { */
+/* 					double b; */
+/* 					b = ((A[i - 1][j][k] + A[i + 1][j][k] + A[i][j - 1][k] + A[i][j + 1][k] + A[i][j][k - 1] + A[i][j][k + 1]) / 6. - A[i][j][k]) / 2; */
+/* 					A[i][j][k] = A[i][j][k] + b; */
+/* 				} */
+/* 			} */
+/* } */
+
 void relax()
 {
-#pragma omp parallel for ordered(3) shared(A)
+#pragma omp parallel for ordered(3) default(none) private(e) shared(A) reduction(max:eps)
     for (i = 1; i <= N - 2; i++) { 
         for (j = 1; j <= N - 2; j++) {
 	        for (k = 1; k <= N - 2; k++) {
-#pragma omp ordered depend(sink: i - 1, j, k) depend(sink: i, j - 1, k) depend(sink: i, j, k - 1)
                 float e;
+#pragma omp ordered depend(sink: i - 1, j, k) depend(sink: i, j - 1, k) depend(sink: i, j, k - 1)
                 e = A[i][j][k];
                 A[i][j][k] = (A[i-1][j][k] + A[i+1][j][k] + A[i][j-1][k] + A[i][j+1][k] + A[i][j][k-1] + A[i][j][k+1]) / 6.;
                 eps=Max(eps, fabs(e - A[i][j][k]));
@@ -79,18 +109,6 @@ void verify()
         }
     }
 	printf("S = %f\n",s);
-}
-
-
-void printa() {
-    for (i = 0; i <= N - 1; i++) {
-        for (j = 0; j <= N - 1; j++) {
-	        for (k = 0; k <= N - 1; k++) {
-                printf("%f ", A[i][j][k]);
-            }
-        }
-    }
-    return;
 }
 
 
