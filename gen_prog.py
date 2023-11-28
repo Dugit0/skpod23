@@ -2,7 +2,6 @@ import os
 
 base = 'base_prog'
 gen = 'gen_prog'
-# processers = [1, 2, 8, 20, 100]
 N = [100, 200, 500, 1000]
 for name in os.listdir(base):
     inp_name = os.path.join(base, name)
@@ -16,4 +15,3 @@ for name in os.listdir(base):
                     f_out.write(f"#define  N  {n}\n")
                 else:
                     f_out.write(line)
-    break
