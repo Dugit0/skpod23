@@ -25,9 +25,9 @@ for name in os.listdir('out'):
 
 for alg, orig_data in data_dict.items():
     print(alg)
-    sorted_data = sorted(orig_data, key=lambda a: (a[0], a[1])).copy()
+    sorted_data = sorted(orig_data, key=lambda a: (-a[0], a[1])).copy()
     # print(*sorted_data, sep='\n')
-    values = sorted(list({i[0] for i in sorted_data}))
+    values = sorted(list({i[0] for i in sorted_data}), reverse=True)
     num_proc = sorted(list({i[1] for i in sorted_data}))
     n = len(num_proc)
     m = len(values)
