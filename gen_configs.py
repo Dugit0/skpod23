@@ -14,6 +14,6 @@ for name in os.listdir(build):
             f.write(f"#BSUB -e {home}out/{name}_{proc}.err\n")
             f.write('\n')
             f.write("#BSUB -n {}\n".format(proc//8 + 1))
-            f.write(f"OMP_NUM_THREADS={proc} {name}\n")
+            f.write(f"OMP_NUM_THREADS={proc} {home}build_prog/{name}\n")
 
 
