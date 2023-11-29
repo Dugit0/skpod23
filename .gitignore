@@ -1,3 +1,4 @@
 *.out
 prog_without_par
 openmp_for
+venv
