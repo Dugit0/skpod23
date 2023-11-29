@@ -36,7 +36,7 @@ void relax()
 	for (i = 1; i <= N - 2; i++)
 		for (j = 1; j <= N - 2; j++)
 			for (k = 1; k <= N - 2; ++k) {
-				if ((k + i + j) % 2 == 1) {
+				if ((i + j + k) % 2 == 1) {
                     double e;
                     e = A[i][j][k];
                     A[i][j][k] = (A[i-1][j][k] + A[i+1][j][k] + A[i][j-1][k] + A[i][j+1][k] + A[i][j][k-1] + A[i][j][k+1]) / 6.;
@@ -48,7 +48,7 @@ void relax()
 	for (i = 1; i <= N - 2; i++)
 		for (j = 1; j <= N - 2; j++)
 			for (k = 1; k <= N - 2; ++k) {
-				if ((k + i + j) % 2 == 0) {
+				if ((i + j + k) % 2 == 0) {
                     double e;
                     e = A[i][j][k];
                     A[i][j][k] = (A[i-1][j][k] + A[i+1][j][k] + A[i][j-1][k] + A[i][j+1][k] + A[i][j][k-1] + A[i][j][k+1]) / 6.;
