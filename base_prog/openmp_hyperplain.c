@@ -72,6 +72,7 @@ struct IndArr **get_hyper(void) {
 
 
 void init() { 
+#pragma omp parallel for collapse(3) default(none) private(i, j, k) shared(A)
     for (i = 0; i <= N - 1; i++) {
         for (j = 0; j <= N - 1; j++) {
 	        for (k = 0; k <= N - 1; k++) {
@@ -89,7 +90,7 @@ void init() {
 void relax(struct IndArr **hyper)
 {
     for (int t = 3; t < 3 * N - 5; t++) {
-        /* printf("t = %d\n", t); */
+#pragma omp parallel for collapse(1) default(none) private(i, j, k) shared(A, hyper, t) reduction(max:eps)
         for (int q = 0; q < hyper[t]->size; q++) {
             i = (hyper[t]->arr)[q].i;
             j = (hyper[t]->arr)[q].j;
@@ -109,6 +110,7 @@ void verify()
 	double s;
 
 	s = 0.;
+#pragma omp parallel for collapse(3) default(none) private(i, j, k) shared(A) reduction(+:s)
 	for (i = 0; i <= N - 1; i++) {
 	    for (j = 0; j <= N - 1; j++) {
 	        for (k = 0; k <= N - 1; k++) {
@@ -116,20 +118,8 @@ void verify()
             }
         }
     }
-	printf("  S = %f\n",s);
+	/* printf("  S = %f\n",s); */
 
-}
-
-
-void printa() {
-    for (i = 0; i <= N - 1; i++) {
-        for (j = 0; j <= N - 1; j++) {
-	        for (k = 0; k <= N - 1; k++) {
-                printf("%f ", A[i][j][k]);
-            }
-        }
-    }
-    return;
 }
 
 
