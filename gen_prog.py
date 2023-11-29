@@ -2,7 +2,7 @@ import os
 
 base = 'base_prog'
 gen = 'gen_prog'
-N = [100, 200, 500, 1000]
+N = [200, 500, 700, 1000, 1200]
 for name in os.listdir(base):
     inp_name = os.path.join(base, name)
     with open(inp_name) as prog_file:
