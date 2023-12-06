@@ -1,0 +1,49 @@
+Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
+Subject: Job 1105009: <#BSUB -W 00:15;#BSUB -o /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_redblack500_O2_120.out;#BSUB -e /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_redblack500_O2_120.err; #BSUB -n 16;OMP_NUM_THREADS=120 /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/build_prog/openmp_redblack500_O2> in cluster <MSUCluster> Done
+
+Job <#BSUB -W 00:15;#BSUB -o /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_redblack500_O2_120.out;#BSUB -e /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_redblack500_O2_120.err; #BSUB -n 16;OMP_NUM_THREADS=120 /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/build_prog/openmp_redblack500_O2> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-skpod23-321-01> in cluster <MSUCluster> at Tue Dec  5 10:44:19 2023
+Job was executed on host(s) <12*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-skpod23-321-01> in cluster <MSUCluster> at Tue Dec  5 12:28:31 2023
+                            <4*polus-c3-ib.bmc.hpc.cs.msu.ru>
+</home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01> was used as the home directory.
+</home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01> was used as the working directory.
+Started at Tue Dec  5 12:28:31 2023
+Terminated at Tue Dec  5 12:28:40 2023
+Results reported at Tue Dec  5 12:28:40 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#BSUB -W 00:15
+#BSUB -o /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_redblack500_O2_120.out
+#BSUB -e /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_redblack500_O2_120.err
+
+#BSUB -n 16
+OMP_NUM_THREADS=120 /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/build_prog/openmp_redblack500_O2
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   658.48 sec.
+    Max Memory :                                 966 MB
+    Average Memory :                             644.33 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                124
+    Run time :                                   9 sec.
+    Turnaround time :                            6261 sec.
+
+The output (if any) follows:
+
+Time = 7.232170
+
+
+PS:
+
+Read file </home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_redblack500_O2_120.err> for stderr output of this job.
+

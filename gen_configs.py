@@ -3,7 +3,7 @@ base = 'base_prog'
 gen = 'gen_prog'
 build = 'build_prog'
 conf = 'configs'
-processers = [1, 2, 8, 20, 100]
+processers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 40, 60, 80, 100, 120, 140, 160]
 home = '/home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/'
 
 for name in os.listdir(build):
