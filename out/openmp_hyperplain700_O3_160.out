@@ -1,14 +1,14 @@
 Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
-Subject: Job 1105241: <#BSUB -W 00:15;#BSUB -o /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_hyperplain700_O3_160.out;#BSUB -e /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_hyperplain700_O3_160.err; #BSUB -n 21;OMP_NUM_THREADS=160 /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/build_prog/openmp_hyperplain700_O3> in cluster <MSUCluster> Exited
+Subject: Job 1107156: <#BSUB -W 00:15;#BSUB -o /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_hyperplain700_O3_160.out;#BSUB -e /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_hyperplain700_O3_160.err; #BSUB -n 21;OMP_NUM_THREADS=160 /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/build_prog/openmp_hyperplain700_O3> in cluster <MSUCluster> Done
 
-Job <#BSUB -W 00:15;#BSUB -o /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_hyperplain700_O3_160.out;#BSUB -e /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_hyperplain700_O3_160.err; #BSUB -n 21;OMP_NUM_THREADS=160 /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/build_prog/openmp_hyperplain700_O3> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-skpod23-321-01> in cluster <MSUCluster> at Tue Dec  5 10:44:21 2023
-Job was executed on host(s) <13*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-skpod23-321-01> in cluster <MSUCluster> at Tue Dec  5 22:27:57 2023
-                            <8*polus-c3-ib.bmc.hpc.cs.msu.ru>
+Job <#BSUB -W 00:15;#BSUB -o /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_hyperplain700_O3_160.out;#BSUB -e /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/out/openmp_hyperplain700_O3_160.err; #BSUB -n 21;OMP_NUM_THREADS=160 /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/build_prog/openmp_hyperplain700_O3> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-skpod23-321-01> in cluster <MSUCluster> at Wed Dec  6 15:44:53 2023
+Job was executed on host(s) <11*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-skpod23-321-01> in cluster <MSUCluster> at Wed Dec  6 19:23:00 2023
+                            <10*polus-c3-ib.bmc.hpc.cs.msu.ru>
 </home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01> was used as the home directory.
 </home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01> was used as the working directory.
-Started at Tue Dec  5 22:27:57 2023
-Terminated at Tue Dec  5 22:43:04 2023
-Results reported at Tue Dec  5 22:43:04 2023
+Started at Wed Dec  6 19:23:00 2023
+Terminated at Wed Dec  6 19:35:19 2023
+Results reported at Wed Dec  6 19:35:19 2023
 
 Your job looked like:
 
@@ -23,24 +23,24 @@ OMP_NUM_THREADS=160 /home_edu/edu-cmc-skpod23-321/edu-cmc-skpod23-321-01/build_p
 
 ------------------------------------------------------------
 
-TERM_RUNLIMIT: job killed after reaching LSF run time limit.
-Exited with exit code 140.
+Successfully completed.
 
 Resource usage summary:
 
-    CPU time :                                   65505.00 sec.
+    CPU time :                                   74194.79 sec.
     Max Memory :                                 2631 MB
-    Average Memory :                             2598.61 MB
+    Average Memory :                             2604.70 MB
     Total Requested Memory :                     -
     Delta Memory :                               -
     Max Swap :                                   -
     Max Processes :                              4
     Max Threads :                                164
-    Run time :                                   906 sec.
-    Turnaround time :                            43123 sec.
+    Run time :                                   739 sec.
+    Turnaround time :                            13826 sec.
 
 The output (if any) follows:
 
+Time = 139.750656
 
 
 PS:
