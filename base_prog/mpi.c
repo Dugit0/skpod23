@@ -5,6 +5,7 @@
 #define Max(a, b) (((a) > (b)) ? (a) : (b))
 #define Min(a, b) (((a) < (b)) ? (a) : (b))
 #define  N   10
+#define  debug 0
 
 int M;
 int m = 5;
@@ -40,6 +41,12 @@ void relax(int st_i, int st_j, int st_k, int tag) {
     st_i = Max(st_i, 1);
     st_j = Max(st_j, 1);
     st_k = Max(st_k, 1);
+    if (debug)
+    printf("%d/%d: start = (%d %d %d), end = (%d %d %d), tag = %d\n",
+            rank, num_threads, 
+            st_i, st_j, st_k, 
+            end_i, end_j, end_k, 
+            tag);
     /* Вот тут синхронизация с предыдущим */
     if (st_i != 1) {
         int i = st_i - 1;
@@ -48,12 +55,19 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         int source = ((st_i / m - 1) * (M*M) + (st_j / m) * M + (st_k / m)) % num_threads; // % num_threads???
         /* int tag =  */
         MPI_Status status;
+        
+        if (debug)
+        printf("%d/%d: reciev from %d, len = %d\n", rank, num_threads, source, message_len);
+
         MPI_Recv(recv_buf, message_len, MPI_DOUBLE, source, tag, MPI_COMM_WORLD, &status);
         for (int j = st_j; j < end_j; j++) {
             for (int k = st_k; k < end_k; k++) {
-                A[i][j][k] = recv_buf[j*N + k];
+                A[i][j][k] = recv_buf[(j - st_j)*(end_j - st_j) + (k - st_k)];
             }
         }
+        free(recv_buf);
+        if (debug)
+        printf("Success recv_buf free in %d/%d\n", rank, num_threads);
     }
     if (st_j != 1) {
         int j = st_j - 1;
@@ -62,12 +76,19 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         int source = ((st_i / m) * (M*M) + (st_j / m - 1) * M + (st_k / m)) % num_threads; // % num_threads???
         /* int tag =  */
         MPI_Status status;
+        
+        if (debug)
+        printf("%d/%d: reciev from %d, len = %d\n", rank, num_threads, source, message_len);
+
         MPI_Recv(recv_buf, message_len, MPI_DOUBLE, source, tag, MPI_COMM_WORLD, &status);
         for (int i = st_i; i < end_i; i++) {
             for (int k = st_k; k < end_k; k++) {
-                A[i][j][k] = recv_buf[i*N + k];
+                A[i][j][k] = recv_buf[(i - st_i)*(end_i - st_i) + (k - st_k)];
             }
         }
+        free(recv_buf);
+        if (debug)
+        printf("Success recv_buf free in %d/%d\n", rank, num_threads);
     }
     if (st_k != 1) {
         int k = st_k - 1;
@@ -76,12 +97,19 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         int source = ((st_i / m) * (M*M) + (st_j / m) * M + (st_k / m - 1)) % num_threads; // % num_threads???
         /* int tag =  */
         MPI_Status status;
+        
+        if (debug)
+        printf("%d/%d: reciev from %d, len = %d\n", rank, num_threads, source, message_len);
+
         MPI_Recv(recv_buf, message_len, MPI_DOUBLE, source, tag, MPI_COMM_WORLD, &status);
         for (int i = st_i; i < end_i; i++) {
             for (int j = st_j; j < end_j; j++) {
-                A[i][j][k] = recv_buf[i*N + j];
+                A[i][j][k] = recv_buf[(i - st_i)*(end_i - st_i) + (j - st_j)];
             }
         }
+        free(recv_buf);
+        if (debug)
+        printf("Success recv_buf free in %d/%d\n", rank, num_threads);
     }
     for (int i = st_i; i < end_i; i++) { 
         for (int j = st_j; j < end_j; j++) {
@@ -89,7 +117,7 @@ void relax(int st_i, int st_j, int st_k, int tag) {
                 double e;
                 e = A[i][j][k];
                 A[i][j][k] = (A[i-1][j][k] + A[i+1][j][k] + A[i][j-1][k] + A[i][j+1][k] + A[i][j][k-1] + A[i][j][k+1]) / 6.;
-                local_eps=Max(local_eps, fabs(e - A[i][j][k]));
+                local_eps = Max(local_eps, fabs(e - A[i][j][k]));
             }    
         }
     }
@@ -100,11 +128,18 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         double *send_buf = calloc(message_len, sizeof(double));
         for (int j = st_j; j < end_j; j++) {
             for (int k = st_k; k < end_k; k++) {
-                send_buf[j*N + k] = A[i][j][k];
+                send_buf[(j - st_j)*(end_j - st_j) + (k - st_k)] = A[i][j][k];
             }
         }
         int dest = ((end_i / m) * (M*M) + (st_j / m) * M + (st_k / m)) % num_threads; // % num_threads???
+        
+        if (debug)
+        printf("%d/%d: send to %d, len = %d\n", rank, num_threads, dest, message_len);
+
         MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
+        free(send_buf);
+        if (debug)
+        printf("Success send_buf free in %d/%d\n", rank, num_threads);
     }
     if (end_j != N - 1) {
         int j = end_j - 1;
@@ -112,11 +147,18 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         double *send_buf = calloc(message_len, sizeof(double));
         for (int i = st_j; i < end_i; i++) {
             for (int k = st_k; k < end_k; k++) {
-                send_buf[i*N + k] = A[i][j][k];
+                send_buf[(i - st_i)*(end_i - st_i) + (k - st_k)] = A[i][j][k];
             }
         }
         int dest = ((st_i / m) * (M*M) + (end_j / m) * M + (st_k / m)) % num_threads; // % num_threads???
+        
+        if (debug)
+        printf("%d/%d: send to %d, len = %d\n", rank, num_threads, dest, message_len);
+
         MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
+        free(send_buf);
+        if (debug)
+        printf("Success send_buf free in %d/%d\n", rank, num_threads);
     }
     if (end_k != N - 1) {
         int k = end_k - 1;
@@ -124,11 +166,18 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         double *send_buf = calloc(message_len, sizeof(double));
         for (int i = st_i; i < end_i; i++) {
             for (int j = st_j; j < end_j; j++) {
-                send_buf[i*N + j] = A[i][j][k];
+                send_buf[(i - st_i)*(end_i - st_i) + (j - st_j)] = A[i][j][k];
             }
         }
         int dest = ((st_i / m) * (M*M) + (st_j / m) * M + (end_k / m)) % num_threads; // % num_threads???
+        
+        if (debug)
+        printf("%d/%d: send to %d, len = %d\n", rank, num_threads, dest, message_len);
+
         MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
+        free(send_buf);
+        if (debug)
+        printf("Success send_buf free in %d/%d\n", rank, num_threads);
     }
 }
 
@@ -148,18 +197,11 @@ double verify(int st_i, int st_j, int st_k) {
         }
     }
     return local_s;
-    /* printf("Proc %d/%d: local_s = %f\n", rank, num_threads, local_s); */
 }
 
 
 int main(int argc, char **argv) {
 
-    // ПАМЯТЬ УТЕКАЕТ!!!
-    // ПАМЯТЬ УТЕКАЕТ!!!
-    // ПАМЯТЬ УТЕКАЕТ!!!
-    // ПАМЯТЬ УТЕКАЕТ!!!
-    // ПАМЯТЬ УТЕКАЕТ!!!
-    // ПАМЯТЬ УТЕКАЕТ!!!
     int status = MPI_Init(&argc, &argv);
     if (status) { 
         printf("MPI not supported\nError with code %d\n", status);
@@ -169,7 +211,8 @@ int main(int argc, char **argv) {
 
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &num_threads);
-    printf("i'm %d / %d\n", rank, num_threads);
+    if (debug)
+    printf("Created %d/%d\n", rank, num_threads);
 
     M = (N + m - 1) / m;
 
@@ -181,6 +224,7 @@ int main(int argc, char **argv) {
     }
     
     init();
+    /* MPI_Barrier(MPI_COMM_WORLD); */
     int it;
     for (it = 1; it <= itmax; it++)
     {
