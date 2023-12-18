@@ -5,7 +5,7 @@
 #define Max(a, b) (((a) > (b)) ? (a) : (b))
 #define Min(a, b) (((a) < (b)) ? (a) : (b))
 #define  N   10
-#define  debug 0
+#define  debug 1
 
 int M;
 int m = 5;
@@ -52,6 +52,10 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         int i = st_i - 1;
         int message_len = (end_j - st_j) * (end_k - st_k);
         double *recv_buf = calloc(message_len, sizeof(double));
+        if (!recv_buf) {
+            printf("Corrupted calloc for recv_buf in %d/%d, message_len = %d\n", rank, num_threads, message_len);
+            MPI_Abort(MPI_COMM_WORLD, MPI_ERR_OTHER);
+        }
         int source = ((st_i / m - 1) * (M*M) + (st_j / m) * M + (st_k / m)) % num_threads; // % num_threads???
         /* int tag =  */
         MPI_Status status;
@@ -65,6 +69,8 @@ void relax(int st_i, int st_j, int st_k, int tag) {
                 A[i][j][k] = recv_buf[(j - st_j)*(end_j - st_j) + (k - st_k)];
             }
         }
+        if (debug)
+        printf("Try recv_buf free in %d/%d, addr=%p\n", rank, num_threads, recv_buf);
         free(recv_buf);
         if (debug)
         printf("Success recv_buf free in %d/%d\n", rank, num_threads);
@@ -73,6 +79,10 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         int j = st_j - 1;
         int message_len = (end_i - st_i) * (end_k - st_k);
         double *recv_buf = calloc(message_len, sizeof(double));
+        if (!recv_buf) {
+            printf("Corrupted calloc for recv_buf in %d/%d, message_len = %d\n", rank, num_threads, message_len);
+            MPI_Abort(MPI_COMM_WORLD, MPI_ERR_OTHER);
+        }
         int source = ((st_i / m) * (M*M) + (st_j / m - 1) * M + (st_k / m)) % num_threads; // % num_threads???
         /* int tag =  */
         MPI_Status status;
@@ -86,6 +96,8 @@ void relax(int st_i, int st_j, int st_k, int tag) {
                 A[i][j][k] = recv_buf[(i - st_i)*(end_i - st_i) + (k - st_k)];
             }
         }
+        if (debug)
+        printf("Try recv_buf free in %d/%d, addr=%p\n", rank, num_threads, recv_buf);
         free(recv_buf);
         if (debug)
         printf("Success recv_buf free in %d/%d\n", rank, num_threads);
@@ -94,6 +106,10 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         int k = st_k - 1;
         int message_len = (end_j - st_j) * (end_i - st_i);
         double *recv_buf = calloc(message_len, sizeof(double));
+        if (!recv_buf) {
+            printf("Corrupted calloc for recv_buf in %d/%d, message_len = %d\n", rank, num_threads, message_len);
+            MPI_Abort(MPI_COMM_WORLD, MPI_ERR_OTHER);
+        }
         int source = ((st_i / m) * (M*M) + (st_j / m) * M + (st_k / m - 1)) % num_threads; // % num_threads???
         /* int tag =  */
         MPI_Status status;
@@ -107,6 +123,8 @@ void relax(int st_i, int st_j, int st_k, int tag) {
                 A[i][j][k] = recv_buf[(i - st_i)*(end_i - st_i) + (j - st_j)];
             }
         }
+        if (debug)
+        printf("Try recv_buf free in %d/%d, addr=%p\n", rank, num_threads, recv_buf);
         free(recv_buf);
         if (debug)
         printf("Success recv_buf free in %d/%d\n", rank, num_threads);
@@ -126,6 +144,10 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         int i = end_i - 1;
         int message_len = (end_j - st_j) * (end_k - st_k);
         double *send_buf = calloc(message_len, sizeof(double));
+        if (!send_buf) {
+            printf("Corrupted calloc for send_buf in %d/%d, message_len = %d\n", rank, num_threads, message_len);
+            MPI_Abort(MPI_COMM_WORLD, MPI_ERR_OTHER);
+        }
         for (int j = st_j; j < end_j; j++) {
             for (int k = st_k; k < end_k; k++) {
                 send_buf[(j - st_j)*(end_j - st_j) + (k - st_k)] = A[i][j][k];
@@ -137,6 +159,8 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         printf("%d/%d: send to %d, len = %d\n", rank, num_threads, dest, message_len);
 
         MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
+        if (debug)
+        printf("Try send_buf free in %d/%d, addr=%p\n", rank, num_threads, send_buf);
         free(send_buf);
         if (debug)
         printf("Success send_buf free in %d/%d\n", rank, num_threads);
@@ -145,6 +169,10 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         int j = end_j - 1;
         int message_len = (end_i - st_i) * (end_k - st_k);
         double *send_buf = calloc(message_len, sizeof(double));
+        if (!send_buf) {
+            printf("Corrupted calloc for send_buf in %d/%d, message_len = %d\n", rank, num_threads, message_len);
+            MPI_Abort(MPI_COMM_WORLD, MPI_ERR_OTHER);
+        }
         for (int i = st_j; i < end_i; i++) {
             for (int k = st_k; k < end_k; k++) {
                 send_buf[(i - st_i)*(end_i - st_i) + (k - st_k)] = A[i][j][k];
@@ -156,6 +184,8 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         printf("%d/%d: send to %d, len = %d\n", rank, num_threads, dest, message_len);
 
         MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
+        if (debug)
+        printf("Try send_buf free in %d/%d, addr=%p\n", rank, num_threads, send_buf);
         free(send_buf);
         if (debug)
         printf("Success send_buf free in %d/%d\n", rank, num_threads);
@@ -164,6 +194,10 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         int k = end_k - 1;
         int message_len = (end_j - st_j) * (end_i - st_i);
         double *send_buf = calloc(message_len, sizeof(double));
+        if (!send_buf) {
+            printf("Corrupted calloc for send_buf in %d/%d, message_len = %d\n", rank, num_threads, message_len);
+            MPI_Abort(MPI_COMM_WORLD, MPI_ERR_OTHER);
+        }
         for (int i = st_i; i < end_i; i++) {
             for (int j = st_j; j < end_j; j++) {
                 send_buf[(i - st_i)*(end_i - st_i) + (j - st_j)] = A[i][j][k];
@@ -175,6 +209,8 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         printf("%d/%d: send to %d, len = %d\n", rank, num_threads, dest, message_len);
 
         MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
+        if (debug)
+        printf("Try send_buf free in %d/%d, addr=%p\n", rank, num_threads, send_buf);
         free(send_buf);
         if (debug)
         printf("Success send_buf free in %d/%d\n", rank, num_threads);

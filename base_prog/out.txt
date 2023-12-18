@@ -1,0 +1,57 @@
+Created 3/8
+Created 0/8
+0/8: start = (1 1 1), end = (5 5 5), tag = 0
+0/8: send to 4, len = 16
+Success send_buf free in 0/8
+0/8: send to 2, len = 16
+Success send_buf free in 0/8
+0/8: send to 1, len = 16
+Success send_buf free in 0/8
+Created 1/8
+1/8: start = (1 1 5), end = (5 5 9), tag = 0
+1/8: reciev from 0, len = 16
+Success recv_buf free in 1/8
+Created 2/8
+2/8: start = (1 5 1), end = (5 9 5), tag = 0
+2/8: reciev from 0, len = 16
+Success recv_buf free in 2/8
+2/8: send to 6, len = 16
+3/8: start = (1 5 5), end = (5 9 9), tag = 0
+3/8: reciev from 1, len = 16
+Created 4/8
+4/8: start = (5 1 1), end = (9 5 5), tag = 0
+4/8: reciev from 0, len = 16
+Success recv_buf free in 4/8
+4/8: send to 6, len = 16
+Created 5/8
+5/8: start = (5 1 5), end = (9 5 9), tag = 0
+5/8: reciev from 1, len = 16
+Success recv_buf free in 5/8
+5/8: reciev from 4, len = 16
+Created 6/8
+6/8: start = (5 5 1), end = (9 9 5), tag = 0
+6/8: reciev from 2, len = 16
+Success recv_buf free in 6/8
+6/8: reciev from 4, len = 16
+Success recv_buf free in 6/8
+6/8: send to 7, len = 16
+Created 7/8
+7/8: start = (5 5 5), end = (9 9 9), tag = 0
+7/8: reciev from 3, len = 16
+1/8: send to 5, len = 16
+Success send_buf free in 1/8
+1/8: send to 3, len = 16
+Success send_buf free in 1/8
+Success send_buf free in 2/8
+2/8: send to 3, len = 16
+Success send_buf free in 2/8
+Success send_buf free in 6/8
+Success recv_buf free in 3/8
+3/8: reciev from 2, len = 16
+Success recv_buf free in 3/8
+3/8: send to 7, len = 16
+Success send_buf free in 3/8
+Success recv_buf free in 7/8
+7/8: reciev from 5, len = 16
+[mpiexec@DESKTOP-A337FFD] Sending Ctrl-C to processes as requested
+[mpiexec@DESKTOP-A337FFD] Press Ctrl-C again to force abort
