@@ -4,7 +4,7 @@
 #include <stdio.h>
 #define  Max(a,b) ((a)>(b)?(a):(b))
 
-#define  N   100
+#define  N   10
 double maxeps = 0.1e-7;
 int itmax = 100;
 int i,j,k;

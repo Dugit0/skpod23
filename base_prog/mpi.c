@@ -224,7 +224,7 @@ int main(int argc, char **argv) {
     }
     
     init();
-    /* MPI_Barrier(MPI_COMM_WORLD); */
+    MPI_Barrier(MPI_COMM_WORLD);
     int it;
     for (it = 1; it <= itmax; it++)
     {
@@ -238,13 +238,11 @@ int main(int argc, char **argv) {
         }
         MPI_Allreduce(&local_eps, &eps, 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD);
         MPI_Barrier(MPI_COMM_WORLD);
-        /* relax(); */
-        /* printf("it=%4i   eps=%f\n", it, eps); */
         if (eps < maxeps) {
             break;
         }
     }
-
+    
     double s = 0.;
     for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_threads) {
         st_i = cur_cube / (M*M) * m;
