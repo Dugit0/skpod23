@@ -5,7 +5,7 @@
 #define Max(a, b) (((a) > (b)) ? (a) : (b))
 #define Min(a, b) (((a) < (b)) ? (a) : (b))
 #define  N   10
-#define  debug 1
+#define  debug 5
 
 int M;
 int m = 5;
@@ -41,7 +41,7 @@ void relax(int st_i, int st_j, int st_k, int tag) {
     st_i = Max(st_i, 1);
     st_j = Max(st_j, 1);
     st_k = Max(st_k, 1);
-    if (debug)
+    if (debug >= 5)
     printf("%d/%d: start = (%d %d %d), end = (%d %d %d), tag = %d\n",
             rank, num_threads, 
             st_i, st_j, st_k, 
@@ -60,7 +60,7 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         /* int tag =  */
         MPI_Status status;
         
-        if (debug)
+        if (debug >= 5)
         printf("%d/%d: reciev from %d, len = %d\n", rank, num_threads, source, message_len);
 
         MPI_Recv(recv_buf, message_len, MPI_DOUBLE, source, tag, MPI_COMM_WORLD, &status);
@@ -69,10 +69,10 @@ void relax(int st_i, int st_j, int st_k, int tag) {
                 A[i][j][k] = recv_buf[(j - st_j)*(end_j - st_j) + (k - st_k)];
             }
         }
-        if (debug)
+        if (debug >= 10)
         printf("Try recv_buf free in %d/%d, addr=%p\n", rank, num_threads, recv_buf);
         free(recv_buf);
-        if (debug)
+        if (debug >= 10)
         printf("Success recv_buf free in %d/%d\n", rank, num_threads);
     }
     if (st_j != 1) {
@@ -87,7 +87,7 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         /* int tag =  */
         MPI_Status status;
         
-        if (debug)
+        if (debug >= 5)
         printf("%d/%d: reciev from %d, len = %d\n", rank, num_threads, source, message_len);
 
         MPI_Recv(recv_buf, message_len, MPI_DOUBLE, source, tag, MPI_COMM_WORLD, &status);
@@ -96,10 +96,10 @@ void relax(int st_i, int st_j, int st_k, int tag) {
                 A[i][j][k] = recv_buf[(i - st_i)*(end_i - st_i) + (k - st_k)];
             }
         }
-        if (debug)
+        if (debug >= 10)
         printf("Try recv_buf free in %d/%d, addr=%p\n", rank, num_threads, recv_buf);
         free(recv_buf);
-        if (debug)
+        if (debug >= 10)
         printf("Success recv_buf free in %d/%d\n", rank, num_threads);
     }
     if (st_k != 1) {
@@ -114,7 +114,7 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         /* int tag =  */
         MPI_Status status;
         
-        if (debug)
+        if (debug >= 5)
         printf("%d/%d: reciev from %d, len = %d\n", rank, num_threads, source, message_len);
 
         MPI_Recv(recv_buf, message_len, MPI_DOUBLE, source, tag, MPI_COMM_WORLD, &status);
@@ -123,10 +123,10 @@ void relax(int st_i, int st_j, int st_k, int tag) {
                 A[i][j][k] = recv_buf[(i - st_i)*(end_i - st_i) + (j - st_j)];
             }
         }
-        if (debug)
+        if (debug >= 10)
         printf("Try recv_buf free in %d/%d, addr=%p\n", rank, num_threads, recv_buf);
         free(recv_buf);
-        if (debug)
+        if (debug >= 10)
         printf("Success recv_buf free in %d/%d\n", rank, num_threads);
     }
     for (int i = st_i; i < end_i; i++) { 
@@ -155,14 +155,14 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         }
         int dest = ((end_i / m) * (M*M) + (st_j / m) * M + (st_k / m)) % num_threads; // % num_threads???
         
-        if (debug)
+        if (debug >= 5)
         printf("%d/%d: send to %d, len = %d\n", rank, num_threads, dest, message_len);
 
         MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
-        if (debug)
+        if (debug >= 10)
         printf("Try send_buf free in %d/%d, addr=%p\n", rank, num_threads, send_buf);
         free(send_buf);
-        if (debug)
+        if (debug >= 10)
         printf("Success send_buf free in %d/%d\n", rank, num_threads);
     }
     if (end_j != N - 1) {
@@ -180,14 +180,14 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         }
         int dest = ((st_i / m) * (M*M) + (end_j / m) * M + (st_k / m)) % num_threads; // % num_threads???
         
-        if (debug)
+        if (debug >= 5)
         printf("%d/%d: send to %d, len = %d\n", rank, num_threads, dest, message_len);
 
         MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
-        if (debug)
+        if (debug >= 10)
         printf("Try send_buf free in %d/%d, addr=%p\n", rank, num_threads, send_buf);
         free(send_buf);
-        if (debug)
+        if (debug >= 10)
         printf("Success send_buf free in %d/%d\n", rank, num_threads);
     }
     if (end_k != N - 1) {
@@ -205,14 +205,14 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         }
         int dest = ((st_i / m) * (M*M) + (st_j / m) * M + (end_k / m)) % num_threads; // % num_threads???
         
-        if (debug)
+        if (debug >= 5)
         printf("%d/%d: send to %d, len = %d\n", rank, num_threads, dest, message_len);
 
         MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
-        if (debug)
+        if (debug >= 10)
         printf("Try send_buf free in %d/%d, addr=%p\n", rank, num_threads, send_buf);
         free(send_buf);
-        if (debug)
+        if (debug >= 10)
         printf("Success send_buf free in %d/%d\n", rank, num_threads);
     }
 }
@@ -247,7 +247,7 @@ int main(int argc, char **argv) {
 
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &num_threads);
-    if (debug)
+    if (debug >= 5)
     printf("Created %d/%d\n", rank, num_threads);
 
     M = (N + m - 1) / m;
