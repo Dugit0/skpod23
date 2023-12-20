@@ -5,7 +5,7 @@
 #define Max(a, b) (((a) > (b)) ? (a) : (b))
 #define Min(a, b) (((a) < (b)) ? (a) : (b))
 #define  N   10
-#define  debug 5
+#define  debug 10
 
 int M;
 int m = 5;
@@ -64,6 +64,8 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         printf("%d/%d: reciev from %d, len = %d\n", rank, num_threads, source, message_len);
 
         MPI_Recv(recv_buf, message_len, MPI_DOUBLE, source, tag, MPI_COMM_WORLD, &status);
+        int send_check = 1;
+        MPI_Send(&send_check, 1, MPI_INT, source, tag, MPI_COMM_WORLD);
         for (int j = st_j; j < end_j; j++) {
             for (int k = st_k; k < end_k; k++) {
                 A[i][j][k] = recv_buf[(j - st_j)*(end_j - st_j) + (k - st_k)];
@@ -91,6 +93,8 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         printf("%d/%d: reciev from %d, len = %d\n", rank, num_threads, source, message_len);
 
         MPI_Recv(recv_buf, message_len, MPI_DOUBLE, source, tag, MPI_COMM_WORLD, &status);
+        int send_check = 1;
+        MPI_Send(&send_check, 1, MPI_INT, source, tag, MPI_COMM_WORLD);
         for (int i = st_i; i < end_i; i++) {
             for (int k = st_k; k < end_k; k++) {
                 A[i][j][k] = recv_buf[(i - st_i)*(end_i - st_i) + (k - st_k)];
@@ -118,6 +122,8 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         printf("%d/%d: reciev from %d, len = %d\n", rank, num_threads, source, message_len);
 
         MPI_Recv(recv_buf, message_len, MPI_DOUBLE, source, tag, MPI_COMM_WORLD, &status);
+        int send_check = 1;
+        MPI_Send(&send_check, 1, MPI_INT, source, tag, MPI_COMM_WORLD);
         for (int i = st_i; i < end_i; i++) {
             for (int j = st_j; j < end_j; j++) {
                 A[i][j][k] = recv_buf[(i - st_i)*(end_i - st_i) + (j - st_j)];
@@ -158,7 +164,10 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         if (debug >= 5)
         printf("%d/%d: send to %d, len = %d\n", rank, num_threads, dest, message_len);
 
-        MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
+        /* MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD); */
+        int recv_check = 0;
+        MPI_Status status;
+        MPI_Sendrecv(send_buf, message_len, MPI_DOUBLE, dest, tag, &recv_check, 1, MPI_INT, dest, tag, MPI_COMM_WORLD, &status);
         if (debug >= 10)
         printf("Try send_buf free in %d/%d, addr=%p\n", rank, num_threads, send_buf);
         free(send_buf);
@@ -183,7 +192,9 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         if (debug >= 5)
         printf("%d/%d: send to %d, len = %d\n", rank, num_threads, dest, message_len);
 
-        MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
+        int recv_check = 0;
+        MPI_Status status;
+        MPI_Sendrecv(send_buf, message_len, MPI_DOUBLE, dest, tag, &recv_check, 1, MPI_INT, dest, tag, MPI_COMM_WORLD, &status);
         if (debug >= 10)
         printf("Try send_buf free in %d/%d, addr=%p\n", rank, num_threads, send_buf);
         free(send_buf);
@@ -198,6 +209,7 @@ void relax(int st_i, int st_j, int st_k, int tag) {
             printf("Corrupted calloc for send_buf in %d/%d, message_len = %d\n", rank, num_threads, message_len);
             MPI_Abort(MPI_COMM_WORLD, MPI_ERR_OTHER);
         }
+        
         for (int i = st_i; i < end_i; i++) {
             for (int j = st_j; j < end_j; j++) {
                 send_buf[(i - st_i)*(end_i - st_i) + (j - st_j)] = A[i][j][k];
@@ -208,10 +220,15 @@ void relax(int st_i, int st_j, int st_k, int tag) {
         if (debug >= 5)
         printf("%d/%d: send to %d, len = %d\n", rank, num_threads, dest, message_len);
 
-        MPI_Send(send_buf, message_len, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
+        int recv_check = 0;
+        MPI_Status status;
+        MPI_Sendrecv(send_buf, message_len, MPI_DOUBLE, dest, tag, &recv_check, 1, MPI_INT, dest, tag, MPI_COMM_WORLD, &status);
+        
         if (debug >= 10)
         printf("Try send_buf free in %d/%d, addr=%p\n", rank, num_threads, send_buf);
+        
         free(send_buf);
+        
         if (debug >= 10)
         printf("Success send_buf free in %d/%d\n", rank, num_threads);
     }
@@ -236,6 +253,20 @@ double verify(int st_i, int st_j, int st_k) {
 }
 
 
+void printa() {
+    for (int i = 0; i <= N - 1; i++) {
+        for (int j = 0; j <= N - 1; j++) {
+            for (int k = 0; k <= N - 1; k++) {
+                printf("%f ", A[i][j][k]);
+            }
+            printf("\n");
+        }
+        printf("=======================\n");
+    }
+    return;
+}
+
+
 int main(int argc, char **argv) {
 
     int status = MPI_Init(&argc, &argv);
@@ -254,6 +285,7 @@ int main(int argc, char **argv) {
 
     double start, end;
     int st_i, st_j, st_k;
+    MPI_Barrier(MPI_COMM_WORLD);
     
     if (rank == 0) {
         start = MPI_Wtime();
@@ -262,7 +294,8 @@ int main(int argc, char **argv) {
     init();
     MPI_Barrier(MPI_COMM_WORLD);
     int it;
-    for (it = 1; it <= itmax; it++)
+    /* for (it = 1; it <= itmax; it++) */
+    for (it = 1; it <= 1; it++)
     {
         eps = 0.;
         local_eps = 0.;
@@ -274,6 +307,12 @@ int main(int argc, char **argv) {
         }
         MPI_Allreduce(&local_eps, &eps, 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD);
         MPI_Barrier(MPI_COMM_WORLD);
+        if (rank == 0) {
+            printa();
+            printf("===============================\n");
+            printf("-------------------------------\n");
+            printf("===============================\n");
+        }
         if (eps < maxeps) {
             break;
         }

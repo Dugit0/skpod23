@@ -1,57 +1,1785 @@
-Created 3/8
-Created 0/8
-0/8: start = (1 1 1), end = (5 5 5), tag = 0
-0/8: send to 4, len = 16
-Success send_buf free in 0/8
-0/8: send to 2, len = 16
-Success send_buf free in 0/8
-0/8: send to 1, len = 16
-Success send_buf free in 0/8
-Created 1/8
-1/8: start = (1 1 5), end = (5 5 9), tag = 0
-1/8: reciev from 0, len = 16
-Success recv_buf free in 1/8
-Created 2/8
-2/8: start = (1 5 1), end = (5 9 5), tag = 0
-2/8: reciev from 0, len = 16
-Success recv_buf free in 2/8
-2/8: send to 6, len = 16
-3/8: start = (1 5 5), end = (5 9 9), tag = 0
-3/8: reciev from 1, len = 16
-Created 4/8
-4/8: start = (5 1 1), end = (9 5 5), tag = 0
-4/8: reciev from 0, len = 16
-Success recv_buf free in 4/8
-4/8: send to 6, len = 16
-Created 5/8
-5/8: start = (5 1 5), end = (9 5 9), tag = 0
-5/8: reciev from 1, len = 16
-Success recv_buf free in 5/8
-5/8: reciev from 4, len = 16
-Created 6/8
-6/8: start = (5 5 1), end = (9 9 5), tag = 0
-6/8: reciev from 2, len = 16
-Success recv_buf free in 6/8
-6/8: reciev from 4, len = 16
-Success recv_buf free in 6/8
-6/8: send to 7, len = 16
-Created 7/8
-7/8: start = (5 5 5), end = (9 9 9), tag = 0
-7/8: reciev from 3, len = 16
-1/8: send to 5, len = 16
-Success send_buf free in 1/8
-1/8: send to 3, len = 16
-Success send_buf free in 1/8
-Success send_buf free in 2/8
-2/8: send to 3, len = 16
-Success send_buf free in 2/8
-Success send_buf free in 6/8
-Success recv_buf free in 3/8
-3/8: reciev from 2, len = 16
-Success recv_buf free in 3/8
-3/8: send to 7, len = 16
-Success send_buf free in 3/8
-Success recv_buf free in 7/8
-7/8: reciev from 5, len = 16
-[mpiexec@DESKTOP-A337FFD] Sending Ctrl-C to processes as requested
-[mpiexec@DESKTOP-A337FFD] Press Ctrl-C again to force abort
+==18227== Memcheck, a memory error detector
+==18227== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==18227== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==18227== Command: ./mpi.out
+==18227== 
+==18228== Memcheck, a memory error detector
+==18228== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==18228== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==18228== Command: ./mpi.out
+==18228== 
+==18229== Memcheck, a memory error detector
+==18229== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==18229== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==18229== Command: ./mpi.out
+==18229== 
+==18231== Memcheck, a memory error detector
+==18231== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==18231== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==18231== Command: ./mpi.out
+==18231== 
+==18230== Memcheck, a memory error detector
+==18230== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==18230== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==18230== Command: ./mpi.out
+==18230== 
+==18232== Memcheck, a memory error detector
+==18232== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==18232== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==18232== Command: ./mpi.out
+==18232== 
+==18233== Memcheck, a memory error detector
+==18233== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==18233== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==18233== Command: ./mpi.out
+==18233== 
+==18234== Memcheck, a memory error detector
+==18234== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==18234== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==18234== Command: ./mpi.out
+==18234== 
+==18228== error calling PR_SET_PTRACER, vgdb might block
+==18231== error calling PR_SET_PTRACER, vgdb might block
+==18229== error calling PR_SET_PTRACER, vgdb might block
+==18227== error calling PR_SET_PTRACER, vgdb might block
+==18230== error calling PR_SET_PTRACER, vgdb might block
+==18234== error calling PR_SET_PTRACER, vgdb might block
+==18232== error calling PR_SET_PTRACER, vgdb might block
+==18233== error calling PR_SET_PTRACER, vgdb might block
+hwloc x86 backend cannot work under Valgrind, disabling.
+May be reenabled by dumping CPUIDs with hwloc-gather-cpuid
+and reloading them under Valgrind with HWLOC_CPUID_PATH.
+hwloc x86 backend cannot work under Valgrind, disabling.
+May be reenabled by dumping CPUIDs with hwloc-gather-cpuid
+and reloading them under Valgrind with HWLOC_CPUID_PATH.
+hwloc x86 backend cannot work under Valgrind, disabling.
+May be reenabled by dumping CPUIDs with hwloc-gather-cpuid
+and reloading them under Valgrind with HWLOC_CPUID_PATH.
+hwloc x86 backend cannot work under Valgrind, disabling.
+May be reenabled by dumping CPUIDs with hwloc-gather-cpuid
+and reloading them under Valgrind with HWLOC_CPUID_PATH.
+hwloc x86 backend cannot work under Valgrind, disabling.
+May be reenabled by dumping CPUIDs with hwloc-gather-cpuid
+and reloading them under Valgrind with HWLOC_CPUID_PATH.
+hwloc x86 backend cannot work under Valgrind, disabling.
+May be reenabled by dumping CPUIDs with hwloc-gather-cpuid
+and reloading them under Valgrind with HWLOC_CPUID_PATH.
+hwloc x86 backend cannot work under Valgrind, disabling.
+May be reenabled by dumping CPUIDs with hwloc-gather-cpuid
+and reloading them under Valgrind with HWLOC_CPUID_PATH.
+hwloc x86 backend cannot work under Valgrind, disabling.
+May be reenabled by dumping CPUIDs with hwloc-gather-cpuid
+and reloading them under Valgrind with HWLOC_CPUID_PATH.
+==18231== Invalid write of size 8
+==18231==    at 0x10A6F9: relax (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18231==    by 0x10AF29: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18231==  Address 0xb1350c8 is 0 bytes after a block of size 360 alloc'd
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x4A3B152: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x4AA475C: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x4A760F9: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x4A776AD: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x69943B0: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18231== 
+==18232== Invalid write of size 8
+==18232==    at 0x10A6F9: relax (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18232==    by 0x10AF29: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18232==  Address 0x78a1d30 is 64 bytes inside a block of size 128 free'd
+==18232==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x1098AC: relax (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18232==    by 0x10AF29: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18232==  Block was alloc'd at
+==18232==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x109643: relax (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18232==    by 0x10AF29: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18232== 
+==18231== 
+==18231== HEAP SUMMARY:
+==18231==     in use at exit: 81,635 bytes in 20 blocks
+==18231==   total heap usage: 10,226 allocs, 10,206 frees, 12,665,463 bytes allocated
+==18231== 
+==18233== 
+==18233== HEAP SUMMARY:
+==18233==     in use at exit: 81,635 bytes in 20 blocks
+==18233==   total heap usage: 10,226 allocs, 10,206 frees, 12,665,463 bytes allocated
+==18233== 
+==18234== 
+==18234== HEAP SUMMARY:
+==18234==     in use at exit: 81,635 bytes in 20 blocks
+==18234==   total heap usage: 10,226 allocs, 10,206 frees, 12,665,463 bytes allocated
+==18234== 
+==18231== 2 bytes in 1 blocks are still reachable in loss record 1 of 15
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x6F1058E: strdup (strdup.c:42)
+==18231==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18231== 
+==18231== 2 bytes in 1 blocks are still reachable in loss record 2 of 15
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x6F1058E: strdup (strdup.c:42)
+==18231==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18231== 
+==18231== 4 bytes in 1 blocks are still reachable in loss record 3 of 15
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x4013E4D: malloc (rtld-malloc.h:56)
+==18231==    by 0x4013E4D: allocate_dtv_entry (dl-tls.c:684)
+==18231==    by 0x4013E4D: allocate_and_init (dl-tls.c:709)
+==18231==    by 0x4013E4D: tls_get_addr_tail (dl-tls.c:907)
+==18231==    by 0x401820B: __tls_get_addr (tls_get_addr.S:55)
+==18231==    by 0x7B22DA2: ???
+==18231==    by 0x7B23FEA: ???
+==18231==    by 0x794F46A: ???
+==18231==    by 0x70C5F05: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18231==    by 0x70A1B30: hwloc_topology_load (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18231==    by 0x69933A5: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18231== 
+==18231== 9 bytes in 1 blocks are still reachable in loss record 4 of 15
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x6F1058E: strdup (strdup.c:42)
+==18231==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18231== 
+==18231== 15 bytes in 1 blocks are still reachable in loss record 5 of 15
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x6F1058E: strdup (strdup.c:42)
+==18231==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18231== 
+==18231== 22 bytes in 1 blocks are still reachable in loss record 6 of 15
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x6F1058E: strdup (strdup.c:42)
+==18231==    by 0x7514570: ??? (in /usr/lib/x86_64-linux-gnu/libinfinipath.so.4.0)
+==18231==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18231==    by 0x4006567: call_init (dl-init.c:33)
+==18231==    by 0x4006567: _dl_init (dl-init.c:117)
+==18231==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18231== 
+==18231== 24 bytes in 1 blocks are still reachable in loss record 7 of 15
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x7398571: verbs_register_driver_34 (in /usr/lib/x86_64-linux-gnu/libibverbs.so.1.14.39.0)
+==18231==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18231==    by 0x4006567: call_init (dl-init.c:33)
+==18231==    by 0x4006567: _dl_init (dl-init.c:117)
+==18231==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18231== 
+==18231== 30 bytes in 1 blocks are still reachable in loss record 8 of 15
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x74434E6: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18231==    by 0x74458F5: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18231==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18231==    by 0x4006567: call_init (dl-init.c:33)
+==18231==    by 0x4006567: _dl_init (dl-init.c:117)
+==18231==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18231== 
+==18231== 64 bytes in 2 blocks are still reachable in loss record 9 of 15
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x40028EF: malloc (rtld-malloc.h:56)
+==18231==    by 0x40028EF: _dl_close_worker.part.0.isra.0 (dl-close.c:383)
+==18231==    by 0x40032A1: _dl_close_worker (dl-close.c:150)
+==18231==    by 0x40032A1: _dl_close (dl-close.c:818)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18231==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18231==    by 0x6EF7E57: dlclose@@GLIBC_2.34 (dlclose.c:31)
+==18231==    by 0x70A2BCF: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18231==    by 0x70ADAC3: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18231==    by 0x709AAB7: hwloc_topology_destroy (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18231==    by 0x4A98105: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231==    by 0x4947025: PMPI_Finalize (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18231== 
+==18231== 73 bytes in 2 blocks are still reachable in loss record 10 of 15
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x40271DF: malloc (rtld-malloc.h:56)
+==18231==    by 0x40271DF: strdup (strdup.c:42)
+==18231==    by 0x4016A66: _dl_load_cache_lookup (dl-cache.c:527)
+==18231==    by 0x400A981: _dl_map_object (dl-load.c:2193)
+==18231==    by 0x4003494: openaux (dl-deps.c:64)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18231==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18231== 
+==18231== 73 bytes in 2 blocks are still reachable in loss record 11 of 15
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x400DD20: malloc (rtld-malloc.h:56)
+==18231==    by 0x400DD20: _dl_new_object (dl-object.c:199)
+==18231==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18231==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18231==    by 0x4003494: openaux (dl-deps.c:64)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18231==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18231== 
+==18231== 2,136 bytes in 2 blocks are still reachable in loss record 12 of 15
+==18231==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x40162DC: calloc (rtld-malloc.h:44)
+==18231==    by 0x40162DC: _dl_check_map_versions (dl-version.c:273)
+==18231==    by 0x400ED13: dl_open_worker_begin (dl-open.c:600)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18231==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18231==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18231==    by 0x6EF86C7: dlopen_implementation (dlopen.c:71)
+==18231==    by 0x6EF86C7: dlopen@@GLIBC_2.34 (dlopen.c:81)
+==18231== 
+==18231== 2,413 bytes in 2 blocks are still reachable in loss record 13 of 15
+==18231==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x400DA02: calloc (rtld-malloc.h:44)
+==18231==    by 0x400DA02: _dl_new_object (dl-object.c:92)
+==18231==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18231==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18231==    by 0x4003494: openaux (dl-deps.c:64)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18231==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18231== 
+==18231== 4,064 bytes in 1 blocks are still reachable in loss record 14 of 15
+==18231==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x400BEA6: calloc (rtld-malloc.h:44)
+==18231==    by 0x400BEA6: do_lookup_unique (dl-lookup.c:271)
+==18231==    by 0x400BEA6: do_lookup_x (dl-lookup.c:556)
+==18231==    by 0x400C210: _dl_lookup_symbol_x (dl-lookup.c:860)
+==18231==    by 0x40114E7: elf_machine_rela (dl-machine.h:294)
+==18231==    by 0x40114E7: elf_dynamic_do_Rela (do-rel.h:142)
+==18231==    by 0x40114E7: _dl_relocate_object (dl-reloc.c:288)
+==18231==    by 0x400EBAD: dl_open_worker_begin (dl-open.c:702)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18231==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18231== 
+==18231== 72,704 bytes in 1 blocks are still reachable in loss record 15 of 15
+==18231==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18231==    by 0x9C36939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==18231==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18231==    by 0x4006567: call_init (dl-init.c:33)
+==18231==    by 0x4006567: _dl_init (dl-init.c:117)
+==18231==    by 0x6FDC904: _dl_catch_exception (dl-error-skeleton.c:182)
+==18231==    by 0x400DFF5: dl_open_worker (dl-open.c:808)
+==18231==    by 0x400DFF5: dl_open_worker (dl-open.c:771)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18231==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18231==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18231==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18231==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18231== 
+==18231== LEAK SUMMARY:
+==18231==    definitely lost: 0 bytes in 0 blocks
+==18231==    indirectly lost: 0 bytes in 0 blocks
+==18231==      possibly lost: 0 bytes in 0 blocks
+==18231==    still reachable: 81,635 bytes in 20 blocks
+==18231==         suppressed: 0 bytes in 0 blocks
+==18231== 
+==18231== For lists of detected and suppressed errors, rerun with: -s
+==18231== ERROR SUMMARY: 9 errors from 1 contexts (suppressed: 0 from 0)
+==18232== 
+==18232== HEAP SUMMARY:
+==18232==     in use at exit: 81,635 bytes in 20 blocks
+==18232==   total heap usage: 10,226 allocs, 10,206 frees, 12,665,463 bytes allocated
+==18232== 
+==18233== 2 bytes in 1 blocks are still reachable in loss record 1 of 15
+==18233==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x6F1058E: strdup (strdup.c:42)
+==18233==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18233== 
+==18233== 2 bytes in 1 blocks are still reachable in loss record 2 of 15
+==18233==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x6F1058E: strdup (strdup.c:42)
+==18233==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18233== 
+==18233== 4 bytes in 1 blocks are still reachable in loss record 3 of 15
+==18233==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x4013E4D: malloc (rtld-malloc.h:56)
+==18233==    by 0x4013E4D: allocate_dtv_entry (dl-tls.c:684)
+==18233==    by 0x4013E4D: allocate_and_init (dl-tls.c:709)
+==18233==    by 0x4013E4D: tls_get_addr_tail (dl-tls.c:907)
+==18233==    by 0x401820B: __tls_get_addr (tls_get_addr.S:55)
+==18233==    by 0x7B22DA2: ???
+==18233==    by 0x7B23FEA: ???
+==18233==    by 0x794F46A: ???
+==18233==    by 0x70C5F05: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18233==    by 0x70A1B30: hwloc_topology_load (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18233==    by 0x69933A5: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18233== 
+==18233== 9 bytes in 1 blocks are still reachable in loss record 4 of 15
+==18233==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x6F1058E: strdup (strdup.c:42)
+==18233==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18233== 
+==18233== 15 bytes in 1 blocks are still reachable in loss record 5 of 15
+==18233==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x6F1058E: strdup (strdup.c:42)
+==18233==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18233== 
+==18233== 22 bytes in 1 blocks are still reachable in loss record 6 of 15
+==18233==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x6F1058E: strdup (strdup.c:42)
+==18233==    by 0x7514570: ??? (in /usr/lib/x86_64-linux-gnu/libinfinipath.so.4.0)
+==18233==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18233==    by 0x4006567: call_init (dl-init.c:33)
+==18233==    by 0x4006567: _dl_init (dl-init.c:117)
+==18233==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18233== 
+==18233== 24 bytes in 1 blocks are still reachable in loss record 7 of 15
+==18233==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x7398571: verbs_register_driver_34 (in /usr/lib/x86_64-linux-gnu/libibverbs.so.1.14.39.0)
+==18233==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18233==    by 0x4006567: call_init (dl-init.c:33)
+==18233==    by 0x4006567: _dl_init (dl-init.c:117)
+==18233==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18233== 
+==18233== 30 bytes in 1 blocks are still reachable in loss record 8 of 15
+==18233==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x74434E6: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18233==    by 0x74458F5: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18233==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18233==    by 0x4006567: call_init (dl-init.c:33)
+==18233==    by 0x4006567: _dl_init (dl-init.c:117)
+==18233==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18233== 
+==18233== 64 bytes in 2 blocks are still reachable in loss record 9 of 15
+==18233==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x40028EF: malloc (rtld-malloc.h:56)
+==18233==    by 0x40028EF: _dl_close_worker.part.0.isra.0 (dl-close.c:383)
+==18233==    by 0x40032A1: _dl_close_worker (dl-close.c:150)
+==18233==    by 0x40032A1: _dl_close (dl-close.c:818)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18233==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18233==    by 0x6EF7E57: dlclose@@GLIBC_2.34 (dlclose.c:31)
+==18233==    by 0x70A2BCF: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18233==    by 0x70ADAC3: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18233==    by 0x709AAB7: hwloc_topology_destroy (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18233==    by 0x4A98105: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x4947025: PMPI_Finalize (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233== 
+==18233== 73 bytes in 2 blocks are still reachable in loss record 10 of 15
+==18233==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x40271DF: malloc (rtld-malloc.h:56)
+==18233==    by 0x40271DF: strdup (strdup.c:42)
+==18233==    by 0x4016A66: _dl_load_cache_lookup (dl-cache.c:527)
+==18233==    by 0x400A981: _dl_map_object (dl-load.c:2193)
+==18233==    by 0x4003494: openaux (dl-deps.c:64)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18233==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18233== 
+==18234== 2 bytes in 1 blocks are still reachable in loss record 1 of 15
+==18234==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x6F1058E: strdup (strdup.c:42)
+==18234==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18234== 
+==18234== 2 bytes in 1 blocks are still reachable in loss record 2 of 15
+==18234==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x6F1058E: strdup (strdup.c:42)
+==18234==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233== 73 bytes in 2 blocks are still reachable in loss record 11 of 15
+==18233==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x400DD20: malloc (rtld-malloc.h:56)
+==18233==    by 0x400DD20: _dl_new_object (dl-object.c:199)
+==18233==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18233==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18233==    by 0x4003494: openaux (dl-deps.c:64)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18233==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18234==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18234== 
+==18234== 4 bytes in 1 blocks are still reachable in loss record 3 of 15
+==18234==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x4013E4D: malloc (rtld-malloc.h:56)
+==18234==    by 0x4013E4D: allocate_dtv_entry (dl-tls.c:684)
+==18234==    by 0x4013E4D: allocate_and_init (dl-tls.c:709)
+==18234==    by 0x4013E4D: tls_get_addr_tail (dl-tls.c:907)
+==18234==    by 0x401820B: __tls_get_addr (tls_get_addr.S:55)
+==18234==    by 0x7B22DA2: ???
+==18234==    by 0x7B23FEA: ???
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18233== 
+==18233== 2,136 bytes in 2 blocks are still reachable in loss record 12 of 15
+==18233==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x40162DC: calloc (rtld-malloc.h:44)
+==18233==    by 0x40162DC: _dl_check_map_versions (dl-version.c:273)
+==18233==    by 0x400ED13: dl_open_worker_begin (dl-open.c:600)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18233==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18233==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18234==    by 0x794F46A: ???
+==18234==    by 0x70C5F05: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18234==    by 0x70A1B30: hwloc_topology_load (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18234==    by 0x69933A5: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18234== 
+==18234== 9 bytes in 1 blocks are still reachable in loss record 4 of 15
+==18234==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x6F1058E: strdup (strdup.c:42)
+==18234==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18233==    by 0x6EF86C7: dlopen_implementation (dlopen.c:71)
+==18233==    by 0x6EF86C7: dlopen@@GLIBC_2.34 (dlopen.c:81)
+==18233== 
+==18233== 2,413 bytes in 2 blocks are still reachable in loss record 13 of 15
+==18233==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x400DA02: calloc (rtld-malloc.h:44)
+==18233==    by 0x400DA02: _dl_new_object (dl-object.c:92)
+==18233==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18233==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18233==    by 0x4003494: openaux (dl-deps.c:64)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18233==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18234== 
+==18234== 15 bytes in 1 blocks are still reachable in loss record 5 of 15
+==18234==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x6F1058E: strdup (strdup.c:42)
+==18234==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18234== 
+==18233==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18233== 
+==18233== 4,064 bytes in 1 blocks are still reachable in loss record 14 of 15
+==18233==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x400BEA6: calloc (rtld-malloc.h:44)
+==18233==    by 0x400BEA6: do_lookup_unique (dl-lookup.c:271)
+==18233==    by 0x400BEA6: do_lookup_x (dl-lookup.c:556)
+==18233==    by 0x400C210: _dl_lookup_symbol_x (dl-lookup.c:860)
+==18233==    by 0x40114E7: elf_machine_rela (dl-machine.h:294)
+==18233==    by 0x40114E7: elf_dynamic_do_Rela (do-rel.h:142)
+==18233==    by 0x40114E7: _dl_relocate_object (dl-reloc.c:288)
+==18233==    by 0x400EBAD: dl_open_worker_begin (dl-open.c:702)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18234== 22 bytes in 1 blocks are still reachable in loss record 6 of 15
+==18234==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x6F1058E: strdup (strdup.c:42)
+==18234==    by 0x7514570: ??? (in /usr/lib/x86_64-linux-gnu/libinfinipath.so.4.0)
+==18234==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18234==    by 0x4006567: call_init (dl-init.c:33)
+==18234==    by 0x4006567: _dl_init (dl-init.c:117)
+==18234==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18234== 
+==18234== 24 bytes in 1 blocks are still reachable in loss record 7 of 15
+==18234==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x7398571: verbs_register_driver_34 (in /usr/lib/x86_64-linux-gnu/libibverbs.so.1.14.39.0)
+==18234==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18234==    by 0x4006567: call_init (dl-init.c:33)
+==18233==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18233== 
+==18233== 72,704 bytes in 1 blocks are still reachable in loss record 15 of 15
+==18233==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18233==    by 0x9C36939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==18233==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18233==    by 0x4006567: call_init (dl-init.c:33)
+==18233==    by 0x4006567: _dl_init (dl-init.c:117)
+==18233==    by 0x6FDC904: _dl_catch_exception (dl-error-skeleton.c:182)
+==18233==    by 0x400DFF5: dl_open_worker (dl-open.c:808)
+==18233==    by 0x400DFF5: dl_open_worker (dl-open.c:771)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18234==    by 0x4006567: _dl_init (dl-init.c:117)
+==18234==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18234== 
+==18234== 30 bytes in 1 blocks are still reachable in loss record 8 of 15
+==18234==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x74434E6: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18234==    by 0x74458F5: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18234==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18234==    by 0x4006567: call_init (dl-init.c:33)
+==18234==    by 0x4006567: _dl_init (dl-init.c:117)
+==18234==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18234== 
+==18234== 64 bytes in 2 blocks are still reachable in loss record 9 of 15
+==18233==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18233==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18233==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18233==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18233== 
+==18233== LEAK SUMMARY:
+==18233==    definitely lost: 0 bytes in 0 blocks
+==18233==    indirectly lost: 0 bytes in 0 blocks
+==18233==      possibly lost: 0 bytes in 0 blocks
+==18233==    still reachable: 81,635 bytes in 20 blocks
+==18233==         suppressed: 0 bytes in 0 blocks
+==18233== 
+==18233== For lists of detected and suppressed errors, rerun with: -s
+==18233== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==18234==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x40028EF: malloc (rtld-malloc.h:56)
+==18234==    by 0x40028EF: _dl_close_worker.part.0.isra.0 (dl-close.c:383)
+==18234==    by 0x40032A1: _dl_close_worker (dl-close.c:150)
+==18234==    by 0x40032A1: _dl_close (dl-close.c:818)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18234==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18234==    by 0x6EF7E57: dlclose@@GLIBC_2.34 (dlclose.c:31)
+==18234==    by 0x70A2BCF: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18234==    by 0x70ADAC3: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18234==    by 0x709AAB7: hwloc_topology_destroy (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18234==    by 0x4A98105: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234==    by 0x4947025: PMPI_Finalize (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18234== 
+==18234== 73 bytes in 2 blocks are still reachable in loss record 10 of 15
+==18234==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x40271DF: malloc (rtld-malloc.h:56)
+==18234==    by 0x40271DF: strdup (strdup.c:42)
+==18234==    by 0x4016A66: _dl_load_cache_lookup (dl-cache.c:527)
+==18234==    by 0x400A981: _dl_map_object (dl-load.c:2193)
+==18234==    by 0x4003494: openaux (dl-deps.c:64)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18234==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18234== 
+==18234== 73 bytes in 2 blocks are still reachable in loss record 11 of 15
+==18234==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x400DD20: malloc (rtld-malloc.h:56)
+==18234==    by 0x400DD20: _dl_new_object (dl-object.c:199)
+==18234==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18234==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18234==    by 0x4003494: openaux (dl-deps.c:64)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18234==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18234== 
+==18234== 2,136 bytes in 2 blocks are still reachable in loss record 12 of 15
+==18234==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x40162DC: calloc (rtld-malloc.h:44)
+==18234==    by 0x40162DC: _dl_check_map_versions (dl-version.c:273)
+==18234==    by 0x400ED13: dl_open_worker_begin (dl-open.c:600)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18234==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18234==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18234==    by 0x6EF86C7: dlopen_implementation (dlopen.c:71)
+==18234==    by 0x6EF86C7: dlopen@@GLIBC_2.34 (dlopen.c:81)
+==18234== 
+==18234== 2,413 bytes in 2 blocks are still reachable in loss record 13 of 15
+==18234==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x400DA02: calloc (rtld-malloc.h:44)
+==18234==    by 0x400DA02: _dl_new_object (dl-object.c:92)
+==18234==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18234==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18234==    by 0x4003494: openaux (dl-deps.c:64)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18234==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18234== 
+==18234== 4,064 bytes in 1 blocks are still reachable in loss record 14 of 15
+==18234==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x400BEA6: calloc (rtld-malloc.h:44)
+==18234==    by 0x400BEA6: do_lookup_unique (dl-lookup.c:271)
+==18234==    by 0x400BEA6: do_lookup_x (dl-lookup.c:556)
+==18234==    by 0x400C210: _dl_lookup_symbol_x (dl-lookup.c:860)
+==18234==    by 0x40114E7: elf_machine_rela (dl-machine.h:294)
+==18234==    by 0x40114E7: elf_dynamic_do_Rela (do-rel.h:142)
+==18234==    by 0x40114E7: _dl_relocate_object (dl-reloc.c:288)
+==18234==    by 0x400EBAD: dl_open_worker_begin (dl-open.c:702)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18234==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18234== 
+==18234== 72,704 bytes in 1 blocks are still reachable in loss record 15 of 15
+==18234==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18234==    by 0x9C36939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==18234==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18234==    by 0x4006567: call_init (dl-init.c:33)
+==18234==    by 0x4006567: _dl_init (dl-init.c:117)
+==18234==    by 0x6FDC904: _dl_catch_exception (dl-error-skeleton.c:182)
+==18234==    by 0x400DFF5: dl_open_worker (dl-open.c:808)
+==18234==    by 0x400DFF5: dl_open_worker (dl-open.c:771)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18234==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18234==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18234==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18234==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18234== 
+==18234== LEAK SUMMARY:
+==18234==    definitely lost: 0 bytes in 0 blocks
+==18234==    indirectly lost: 0 bytes in 0 blocks
+==18234==      possibly lost: 0 bytes in 0 blocks
+==18234==    still reachable: 81,635 bytes in 20 blocks
+==18234==         suppressed: 0 bytes in 0 blocks
+==18234== 
+==18234== For lists of detected and suppressed errors, rerun with: -s
+==18234== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==18228== 
+==18228== HEAP SUMMARY:
+==18228==     in use at exit: 81,635 bytes in 20 blocks
+==18228==   total heap usage: 10,227 allocs, 10,207 frees, 12,665,527 bytes allocated
+==18228== 
+==18232== 2 bytes in 1 blocks are still reachable in loss record 1 of 15
+==18232==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x6F1058E: strdup (strdup.c:42)
+==18232==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18232== 
+==18232== 2 bytes in 1 blocks are still reachable in loss record 2 of 15
+==18232==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x6F1058E: strdup (strdup.c:42)
+==18232==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18232== 
+==18232== 4 bytes in 1 blocks are still reachable in loss record 3 of 15
+==18232==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x4013E4D: malloc (rtld-malloc.h:56)
+==18232==    by 0x4013E4D: allocate_dtv_entry (dl-tls.c:684)
+==18232==    by 0x4013E4D: allocate_and_init (dl-tls.c:709)
+==18232==    by 0x4013E4D: tls_get_addr_tail (dl-tls.c:907)
+==18232==    by 0x401820B: __tls_get_addr (tls_get_addr.S:55)
+==18232==    by 0x7B22DA2: ???
+==18232==    by 0x7B23FEA: ???
+==18232==    by 0x794F46A: ???
+==18232==    by 0x70C5F05: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18232==    by 0x70A1B30: hwloc_topology_load (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18232==    by 0x69933A5: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18232== 
+==18232== 9 bytes in 1 blocks are still reachable in loss record 4 of 15
+==18232==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x6F1058E: strdup (strdup.c:42)
+==18232==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18232== 
+==18232== 15 bytes in 1 blocks are still reachable in loss record 5 of 15
+==18232==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x6F1058E: strdup (strdup.c:42)
+==18232==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18232== 
+==18232== 22 bytes in 1 blocks are still reachable in loss record 6 of 15
+==18232==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x6F1058E: strdup (strdup.c:42)
+==18232==    by 0x7514570: ??? (in /usr/lib/x86_64-linux-gnu/libinfinipath.so.4.0)
+==18232==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18232==    by 0x4006567: call_init (dl-init.c:33)
+==18232==    by 0x4006567: _dl_init (dl-init.c:117)
+==18232==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18232== 
+==18232== 24 bytes in 1 blocks are still reachable in loss record 7 of 15
+==18232==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x7398571: verbs_register_driver_34 (in /usr/lib/x86_64-linux-gnu/libibverbs.so.1.14.39.0)
+==18232==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18232==    by 0x4006567: call_init (dl-init.c:33)
+==18232==    by 0x4006567: _dl_init (dl-init.c:117)
+==18232==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18232== 
+==18232== 30 bytes in 1 blocks are still reachable in loss record 8 of 15
+==18232==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x74434E6: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18232==    by 0x74458F5: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18232==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18232==    by 0x4006567: call_init (dl-init.c:33)
+==18232==    by 0x4006567: _dl_init (dl-init.c:117)
+==18232==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18232== 
+==18232== 64 bytes in 2 blocks are still reachable in loss record 9 of 15
+==18232==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x40028EF: malloc (rtld-malloc.h:56)
+==18232==    by 0x40028EF: _dl_close_worker.part.0.isra.0 (dl-close.c:383)
+==18232==    by 0x40032A1: _dl_close_worker (dl-close.c:150)
+==18232==    by 0x40032A1: _dl_close (dl-close.c:818)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18232==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18232==    by 0x6EF7E57: dlclose@@GLIBC_2.34 (dlclose.c:31)
+==18232==    by 0x70A2BCF: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18232==    by 0x70ADAC3: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18232==    by 0x709AAB7: hwloc_topology_destroy (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18232==    by 0x4A98105: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232==    by 0x4947025: PMPI_Finalize (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18232== 
+==18232== 73 bytes in 2 blocks are still reachable in loss record 10 of 15
+==18232==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x40271DF: malloc (rtld-malloc.h:56)
+==18232==    by 0x40271DF: strdup (strdup.c:42)
+==18232==    by 0x4016A66: _dl_load_cache_lookup (dl-cache.c:527)
+==18232==    by 0x400A981: _dl_map_object (dl-load.c:2193)
+==18232==    by 0x4003494: openaux (dl-deps.c:64)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18232==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18232== 
+==18232== 73 bytes in 2 blocks are still reachable in loss record 11 of 15
+==18232==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x400DD20: malloc (rtld-malloc.h:56)
+==18232==    by 0x400DD20: _dl_new_object (dl-object.c:199)
+==18232==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18232==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18232==    by 0x4003494: openaux (dl-deps.c:64)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18232==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18232== 
+==18232== 2,136 bytes in 2 blocks are still reachable in loss record 12 of 15
+==18232==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x40162DC: calloc (rtld-malloc.h:44)
+==18232==    by 0x40162DC: _dl_check_map_versions (dl-version.c:273)
+==18232==    by 0x400ED13: dl_open_worker_begin (dl-open.c:600)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18232==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18232==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18232==    by 0x6EF86C7: dlopen_implementation (dlopen.c:71)
+==18232==    by 0x6EF86C7: dlopen@@GLIBC_2.34 (dlopen.c:81)
+==18232== 
+==18232== 2,413 bytes in 2 blocks are still reachable in loss record 13 of 15
+==18232==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x400DA02: calloc (rtld-malloc.h:44)
+==18232==    by 0x400DA02: _dl_new_object (dl-object.c:92)
+==18232==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18232==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18232==    by 0x4003494: openaux (dl-deps.c:64)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18232==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18232== 
+==18232== 4,064 bytes in 1 blocks are still reachable in loss record 14 of 15
+==18232==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x400BEA6: calloc (rtld-malloc.h:44)
+==18232==    by 0x400BEA6: do_lookup_unique (dl-lookup.c:271)
+==18232==    by 0x400BEA6: do_lookup_x (dl-lookup.c:556)
+==18232==    by 0x400C210: _dl_lookup_symbol_x (dl-lookup.c:860)
+==18232==    by 0x40114E7: elf_machine_rela (dl-machine.h:294)
+==18232==    by 0x40114E7: elf_dynamic_do_Rela (do-rel.h:142)
+==18232==    by 0x40114E7: _dl_relocate_object (dl-reloc.c:288)
+==18232==    by 0x400EBAD: dl_open_worker_begin (dl-open.c:702)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18232==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18232== 
+==18232== 72,704 bytes in 1 blocks are still reachable in loss record 15 of 15
+==18232==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18232==    by 0x9C36939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==18232==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18232==    by 0x4006567: call_init (dl-init.c:33)
+==18232==    by 0x4006567: _dl_init (dl-init.c:117)
+==18232==    by 0x6FDC904: _dl_catch_exception (dl-error-skeleton.c:182)
+==18232==    by 0x400DFF5: dl_open_worker (dl-open.c:808)
+==18232==    by 0x400DFF5: dl_open_worker (dl-open.c:771)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18232==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18232==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18232==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18232==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18232== 
+==18232== LEAK SUMMARY:
+==18232==    definitely lost: 0 bytes in 0 blocks
+==18232==    indirectly lost: 0 bytes in 0 blocks
+==18232==      possibly lost: 0 bytes in 0 blocks
+==18232==    still reachable: 81,635 bytes in 20 blocks
+==18232==         suppressed: 0 bytes in 0 blocks
+==18232== 
+==18232== For lists of detected and suppressed errors, rerun with: -s
+==18232== ERROR SUMMARY: 16 errors from 1 contexts (suppressed: 0 from 0)
+==18228== 2 bytes in 1 blocks are still reachable in loss record 1 of 15
+==18228==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x6F1058E: strdup (strdup.c:42)
+==18228==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18228== 
+==18228== 2 bytes in 1 blocks are still reachable in loss record 2 of 15
+==18228==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x6F1058E: strdup (strdup.c:42)
+==18228==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18228== 
+==18228== 4 bytes in 1 blocks are still reachable in loss record 3 of 15
+==18228==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x4013E4D: malloc (rtld-malloc.h:56)
+==18228==    by 0x4013E4D: allocate_dtv_entry (dl-tls.c:684)
+==18228==    by 0x4013E4D: allocate_and_init (dl-tls.c:709)
+==18228==    by 0x4013E4D: tls_get_addr_tail (dl-tls.c:907)
+==18228==    by 0x401820B: __tls_get_addr (tls_get_addr.S:55)
+==18228==    by 0x7B22DA2: ???
+==18228==    by 0x7B23FEA: ???
+==18228==    by 0x794F46A: ???
+==18228==    by 0x70C5F05: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18228==    by 0x70A1B30: hwloc_topology_load (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18228==    by 0x69933A5: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18228== 
+==18228== 9 bytes in 1 blocks are still reachable in loss record 4 of 15
+==18228==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x6F1058E: strdup (strdup.c:42)
+==18228==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18228== 
+==18228== 15 bytes in 1 blocks are still reachable in loss record 5 of 15
+==18228==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x6F1058E: strdup (strdup.c:42)
+==18228==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18228== 
+==18228== 22 bytes in 1 blocks are still reachable in loss record 6 of 15
+==18228==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x6F1058E: strdup (strdup.c:42)
+==18228==    by 0x7514570: ??? (in /usr/lib/x86_64-linux-gnu/libinfinipath.so.4.0)
+==18228==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18228==    by 0x4006567: call_init (dl-init.c:33)
+==18228==    by 0x4006567: _dl_init (dl-init.c:117)
+==18228==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18228== 
+==18228== 24 bytes in 1 blocks are still reachable in loss record 7 of 15
+==18228==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x7398571: verbs_register_driver_34 (in /usr/lib/x86_64-linux-gnu/libibverbs.so.1.14.39.0)
+==18228==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18228==    by 0x4006567: call_init (dl-init.c:33)
+==18228==    by 0x4006567: _dl_init (dl-init.c:117)
+==18228==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18228== 
+==18228== 30 bytes in 1 blocks are still reachable in loss record 8 of 15
+==18228==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x74434E6: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18228==    by 0x74458F5: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18228==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18228==    by 0x4006567: call_init (dl-init.c:33)
+==18228==    by 0x4006567: _dl_init (dl-init.c:117)
+==18228==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18228== 
+==18228== 64 bytes in 2 blocks are still reachable in loss record 9 of 15
+==18228==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x40028EF: malloc (rtld-malloc.h:56)
+==18228==    by 0x40028EF: _dl_close_worker.part.0.isra.0 (dl-close.c:383)
+==18228==    by 0x40032A1: _dl_close_worker (dl-close.c:150)
+==18228==    by 0x40032A1: _dl_close (dl-close.c:818)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18228==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18228==    by 0x6EF7E57: dlclose@@GLIBC_2.34 (dlclose.c:31)
+==18228==    by 0x70A2BCF: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18228==    by 0x70ADAC3: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18228==    by 0x709AAB7: hwloc_topology_destroy (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18228==    by 0x4A98105: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228==    by 0x4947025: PMPI_Finalize (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18228== 
+==18228== 73 bytes in 2 blocks are still reachable in loss record 10 of 15
+==18228==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x40271DF: malloc (rtld-malloc.h:56)
+==18228==    by 0x40271DF: strdup (strdup.c:42)
+==18228==    by 0x4016A66: _dl_load_cache_lookup (dl-cache.c:527)
+==18228==    by 0x400A981: _dl_map_object (dl-load.c:2193)
+==18228==    by 0x4003494: openaux (dl-deps.c:64)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18228==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18228== 
+==18228== 73 bytes in 2 blocks are still reachable in loss record 11 of 15
+==18228==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x400DD20: malloc (rtld-malloc.h:56)
+==18228==    by 0x400DD20: _dl_new_object (dl-object.c:199)
+==18228==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18228==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18228==    by 0x4003494: openaux (dl-deps.c:64)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18228==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18228== 
+==18228== 2,136 bytes in 2 blocks are still reachable in loss record 12 of 15
+==18228==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x40162DC: calloc (rtld-malloc.h:44)
+==18228==    by 0x40162DC: _dl_check_map_versions (dl-version.c:273)
+==18228==    by 0x400ED13: dl_open_worker_begin (dl-open.c:600)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18228==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18228==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18228==    by 0x6EF86C7: dlopen_implementation (dlopen.c:71)
+==18228==    by 0x6EF86C7: dlopen@@GLIBC_2.34 (dlopen.c:81)
+==18228== 
+==18228== 2,413 bytes in 2 blocks are still reachable in loss record 13 of 15
+==18228==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x400DA02: calloc (rtld-malloc.h:44)
+==18228==    by 0x400DA02: _dl_new_object (dl-object.c:92)
+==18228==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18228==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18228==    by 0x4003494: openaux (dl-deps.c:64)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18228==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18228== 
+==18228== 4,064 bytes in 1 blocks are still reachable in loss record 14 of 15
+==18228==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x400BEA6: calloc (rtld-malloc.h:44)
+==18228==    by 0x400BEA6: do_lookup_unique (dl-lookup.c:271)
+==18228==    by 0x400BEA6: do_lookup_x (dl-lookup.c:556)
+==18228==    by 0x400C210: _dl_lookup_symbol_x (dl-lookup.c:860)
+==18228==    by 0x40114E7: elf_machine_rela (dl-machine.h:294)
+==18228==    by 0x40114E7: elf_dynamic_do_Rela (do-rel.h:142)
+==18228==    by 0x40114E7: _dl_relocate_object (dl-reloc.c:288)
+==18228==    by 0x400EBAD: dl_open_worker_begin (dl-open.c:702)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18228==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18228== 
+==18228== 72,704 bytes in 1 blocks are still reachable in loss record 15 of 15
+==18228==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18228==    by 0x9C36939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==18228==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18228==    by 0x4006567: call_init (dl-init.c:33)
+==18228==    by 0x4006567: _dl_init (dl-init.c:117)
+==18228==    by 0x6FDC904: _dl_catch_exception (dl-error-skeleton.c:182)
+==18228==    by 0x400DFF5: dl_open_worker (dl-open.c:808)
+==18228==    by 0x400DFF5: dl_open_worker (dl-open.c:771)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18228==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18228==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18228==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18228==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18228== 
+==18228== LEAK SUMMARY:
+==18228==    definitely lost: 0 bytes in 0 blocks
+==18228==    indirectly lost: 0 bytes in 0 blocks
+==18228==      possibly lost: 0 bytes in 0 blocks
+==18228==    still reachable: 81,635 bytes in 20 blocks
+==18228==         suppressed: 0 bytes in 0 blocks
+==18228== 
+==18228== For lists of detected and suppressed errors, rerun with: -s
+==18228== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==18229== 
+==18227== 
+==18227== HEAP SUMMARY:
+==18227==     in use at exit: 81,635 bytes in 20 blocks
+==18227==   total heap usage: 10,233 allocs, 10,213 frees, 12,666,061 bytes allocated
+==18227== 
+==18229== HEAP SUMMARY:
+==18229==     in use at exit: 81,635 bytes in 20 blocks
+==18229==   total heap usage: 10,226 allocs, 10,206 frees, 12,665,463 bytes allocated
+==18229== 
+==18230== 
+==18230== HEAP SUMMARY:
+==18230==     in use at exit: 81,635 bytes in 20 blocks
+==18230==   total heap usage: 10,226 allocs, 10,206 frees, 12,665,463 bytes allocated
+==18230== 
+==18229== 2 bytes in 1 blocks are still reachable in loss record 1 of 15
+==18229==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x6F1058E: strdup (strdup.c:42)
+==18229==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18229== 
+==18229== 2 bytes in 1 blocks are still reachable in loss record 2 of 15
+==18229==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x6F1058E: strdup (strdup.c:42)
+==18229==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18229== 
+==18229== 4 bytes in 1 blocks are still reachable in loss record 3 of 15
+==18229==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x4013E4D: malloc (rtld-malloc.h:56)
+==18229==    by 0x4013E4D: allocate_dtv_entry (dl-tls.c:684)
+==18229==    by 0x4013E4D: allocate_and_init (dl-tls.c:709)
+==18229==    by 0x4013E4D: tls_get_addr_tail (dl-tls.c:907)
+==18229==    by 0x401820B: __tls_get_addr (tls_get_addr.S:55)
+==18229==    by 0x7B22DA2: ???
+==18229==    by 0x7B23FEA: ???
+==18229==    by 0x794F46A: ???
+==18229==    by 0x70C5F05: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18229==    by 0x70A1B30: hwloc_topology_load (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18229==    by 0x69933A5: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18229== 
+==18229== 9 bytes in 1 blocks are still reachable in loss record 4 of 15
+==18229==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x6F1058E: strdup (strdup.c:42)
+==18229==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18229== 
+==18229== 15 bytes in 1 blocks are still reachable in loss record 5 of 15
+==18229==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x6F1058E: strdup (strdup.c:42)
+==18229==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18229== 
+==18229== 22 bytes in 1 blocks are still reachable in loss record 6 of 15
+==18229==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x6F1058E: strdup (strdup.c:42)
+==18229==    by 0x7514570: ??? (in /usr/lib/x86_64-linux-gnu/libinfinipath.so.4.0)
+==18229==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18229==    by 0x4006567: call_init (dl-init.c:33)
+==18229==    by 0x4006567: _dl_init (dl-init.c:117)
+==18229==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18229== 
+==18229== 24 bytes in 1 blocks are still reachable in loss record 7 of 15
+==18229==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x7398571: verbs_register_driver_34 (in /usr/lib/x86_64-linux-gnu/libibverbs.so.1.14.39.0)
+==18229==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18229==    by 0x4006567: call_init (dl-init.c:33)
+==18229==    by 0x4006567: _dl_init (dl-init.c:117)
+==18229==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18229== 
+==18229== 30 bytes in 1 blocks are still reachable in loss record 8 of 15
+==18229==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x74434E6: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18229==    by 0x74458F5: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18229==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18229==    by 0x4006567: call_init (dl-init.c:33)
+==18229==    by 0x4006567: _dl_init (dl-init.c:117)
+==18229==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18229== 
+==18229== 64 bytes in 2 blocks are still reachable in loss record 9 of 15
+==18229==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x40028EF: malloc (rtld-malloc.h:56)
+==18229==    by 0x40028EF: _dl_close_worker.part.0.isra.0 (dl-close.c:383)
+==18229==    by 0x40032A1: _dl_close_worker (dl-close.c:150)
+==18229==    by 0x40032A1: _dl_close (dl-close.c:818)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18229==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18229==    by 0x6EF7E57: dlclose@@GLIBC_2.34 (dlclose.c:31)
+==18229==    by 0x70A2BCF: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18229==    by 0x70ADAC3: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18229==    by 0x709AAB7: hwloc_topology_destroy (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18229==    by 0x4A98105: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x4947025: PMPI_Finalize (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229== 
+==18229== 73 bytes in 2 blocks are still reachable in loss record 10 of 15
+==18229==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x40271DF: malloc (rtld-malloc.h:56)
+==18229==    by 0x40271DF: strdup (strdup.c:42)
+==18229==    by 0x4016A66: _dl_load_cache_lookup (dl-cache.c:527)
+==18229==    by 0x400A981: _dl_map_object (dl-load.c:2193)
+==18229==    by 0x4003494: openaux (dl-deps.c:64)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18229==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18229== 
+==18229== 73 bytes in 2 blocks are still reachable in loss record 11 of 15
+==18229==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x400DD20: malloc (rtld-malloc.h:56)
+==18229==    by 0x400DD20: _dl_new_object (dl-object.c:199)
+==18229==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18229==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18229==    by 0x4003494: openaux (dl-deps.c:64)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18229==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18229== 
+==18229== 2,136 bytes in 2 blocks are still reachable in loss record 12 of 15
+==18229==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x40162DC: calloc (rtld-malloc.h:44)
+==18229==    by 0x40162DC: _dl_check_map_versions (dl-version.c:273)
+==18229==    by 0x400ED13: dl_open_worker_begin (dl-open.c:600)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18229==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18229==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18229==    by 0x6EF86C7: dlopen_implementation (dlopen.c:71)
+==18229==    by 0x6EF86C7: dlopen@@GLIBC_2.34 (dlopen.c:81)
+==18229== 
+==18229== 2,413 bytes in 2 blocks are still reachable in loss record 13 of 15
+==18229==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x400DA02: calloc (rtld-malloc.h:44)
+==18229==    by 0x400DA02: _dl_new_object (dl-object.c:92)
+==18229==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18229==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18229==    by 0x4003494: openaux (dl-deps.c:64)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18229==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230== 2 bytes in 1 blocks are still reachable in loss record 1 of 15
+==18230==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227== 2 bytes in 1 blocks are still reachable in loss record 1 of 15
+==18227==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x6F1058E: strdup (strdup.c:42)
+==18227==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18229== 
+==18229== 4,064 bytes in 1 blocks are still reachable in loss record 14 of 15
+==18229==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x400BEA6: calloc (rtld-malloc.h:44)
+==18229==    by 0x400BEA6: do_lookup_unique (dl-lookup.c:271)
+==18229==    by 0x400BEA6: do_lookup_x (dl-lookup.c:556)
+==18229==    by 0x400C210: _dl_lookup_symbol_x (dl-lookup.c:860)
+==18229==    by 0x40114E7: elf_machine_rela (dl-machine.h:294)
+==18229==    by 0x40114E7: elf_dynamic_do_Rela (do-rel.h:142)
+==18229==    by 0x40114E7: _dl_relocate_object (dl-reloc.c:288)
+==18229==    by 0x400EBAD: dl_open_worker_begin (dl-open.c:702)
+==18230==    by 0x6F1058E: strdup (strdup.c:42)
+==18230==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18227== 
+==18227== 2 bytes in 1 blocks are still reachable in loss record 2 of 15
+==18227==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x6F1058E: strdup (strdup.c:42)
+==18227==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18229==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18229== 
+==18229== 72,704 bytes in 1 blocks are still reachable in loss record 15 of 15
+==18230==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18230== 
+==18227==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18227== 
+==18227== 4 bytes in 1 blocks are still reachable in loss record 3 of 15
+==18227==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x4013E4D: malloc (rtld-malloc.h:56)
+==18227==    by 0x4013E4D: allocate_dtv_entry (dl-tls.c:684)
+==18227==    by 0x4013E4D: allocate_and_init (dl-tls.c:709)
+==18227==    by 0x4013E4D: tls_get_addr_tail (dl-tls.c:907)
+==18227==    by 0x401820B: __tls_get_addr (tls_get_addr.S:55)
+==18229==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18229==    by 0x9C36939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==18229==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18229==    by 0x4006567: call_init (dl-init.c:33)
+==18229==    by 0x4006567: _dl_init (dl-init.c:117)
+==18229==    by 0x6FDC904: _dl_catch_exception (dl-error-skeleton.c:182)
+==18229==    by 0x400DFF5: dl_open_worker (dl-open.c:808)
+==18229==    by 0x400DFF5: dl_open_worker (dl-open.c:771)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18229==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18229==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18229==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18230== 2 bytes in 1 blocks are still reachable in loss record 2 of 15
+==18230==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x6F1058E: strdup (strdup.c:42)
+==18230==    by 0x4A9664A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18230== 
+==18227==    by 0x7B22DA2: ???
+==18227==    by 0x7B23FEA: ???
+==18227==    by 0x794F46A: ???
+==18227==    by 0x70C5F05: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18227==    by 0x70A1B30: hwloc_topology_load (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18227==    by 0x69933A5: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18227== 
+==18227== 9 bytes in 1 blocks are still reachable in loss record 4 of 15
+==18227==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x6F1058E: strdup (strdup.c:42)
+==18227==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18229==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18229== 
+==18229== LEAK SUMMARY:
+==18229==    definitely lost: 0 bytes in 0 blocks
+==18229==    indirectly lost: 0 bytes in 0 blocks
+==18229==      possibly lost: 0 bytes in 0 blocks
+==18229==    still reachable: 81,635 bytes in 20 blocks
+==18229==         suppressed: 0 bytes in 0 blocks
+==18229== 
+==18229== For lists of detected and suppressed errors, rerun with: -s
+==18229== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==18230== 4 bytes in 1 blocks are still reachable in loss record 3 of 15
+==18230==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x4013E4D: malloc (rtld-malloc.h:56)
+==18230==    by 0x4013E4D: allocate_dtv_entry (dl-tls.c:684)
+==18230==    by 0x4013E4D: allocate_and_init (dl-tls.c:709)
+==18230==    by 0x4013E4D: tls_get_addr_tail (dl-tls.c:907)
+==18230==    by 0x401820B: __tls_get_addr (tls_get_addr.S:55)
+==18227==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18227== 
+==18227== 15 bytes in 1 blocks are still reachable in loss record 5 of 15
+==18227==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x6F1058E: strdup (strdup.c:42)
+==18230==    by 0x7B22DA2: ???
+==18230==    by 0x7B23FEA: ???
+==18230==    by 0x794F46A: ???
+==18230==    by 0x70C5F05: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18230==    by 0x70A1B30: hwloc_topology_load (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18227==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18227== 
+==18230==    by 0x69933A5: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18230== 
+==18230== 9 bytes in 1 blocks are still reachable in loss record 4 of 15
+==18230==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x6F1058E: strdup (strdup.c:42)
+==18230==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x4ABA332: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227== 22 bytes in 1 blocks are still reachable in loss record 6 of 15
+==18227==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x6F1058E: strdup (strdup.c:42)
+==18227==    by 0x7514570: ??? (in /usr/lib/x86_64-linux-gnu/libinfinipath.so.4.0)
+==18227==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18230==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18230== 
+==18227==    by 0x4006567: call_init (dl-init.c:33)
+==18227==    by 0x4006567: _dl_init (dl-init.c:117)
+==18227==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18227== 
+==18227== 24 bytes in 1 blocks are still reachable in loss record 7 of 15
+==18227==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230== 15 bytes in 1 blocks are still reachable in loss record 5 of 15
+==18230==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x6F1058E: strdup (strdup.c:42)
+==18230==    by 0x4A9663E: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x4ABA36A: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227==    by 0x7398571: verbs_register_driver_34 (in /usr/lib/x86_64-linux-gnu/libibverbs.so.1.14.39.0)
+==18227==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18227==    by 0x4006567: call_init (dl-init.c:33)
+==18227==    by 0x4006567: _dl_init (dl-init.c:117)
+==18227==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18227== 
+==18227== 30 bytes in 1 blocks are still reachable in loss record 8 of 15
+==18227==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x74434E6: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18230==    by 0x4AC0D40: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x693BE98: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x6993774: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x49477ED: PMPI_Init (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x10AD9B: main (in /home/dmitry/Sem5/skpod23/base_prog/mpi.out)
+==18230== 
+==18230== 22 bytes in 1 blocks are still reachable in loss record 6 of 15
+==18227==    by 0x74458F5: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18227==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18227==    by 0x4006567: call_init (dl-init.c:33)
+==18227==    by 0x4006567: _dl_init (dl-init.c:117)
+==18227==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18227== 
+==18227== 64 bytes in 2 blocks are still reachable in loss record 9 of 15
+==18230==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x6F1058E: strdup (strdup.c:42)
+==18230==    by 0x7514570: ??? (in /usr/lib/x86_64-linux-gnu/libinfinipath.so.4.0)
+==18230==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18230==    by 0x4006567: call_init (dl-init.c:33)
+==18230==    by 0x4006567: _dl_init (dl-init.c:117)
+==18227==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x40028EF: malloc (rtld-malloc.h:56)
+==18227==    by 0x40028EF: _dl_close_worker.part.0.isra.0 (dl-close.c:383)
+==18227==    by 0x40032A1: _dl_close_worker (dl-close.c:150)
+==18227==    by 0x40032A1: _dl_close (dl-close.c:818)
+==18230==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18230== 
+==18230== 24 bytes in 1 blocks are still reachable in loss record 7 of 15
+==18230==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x7398571: verbs_register_driver_34 (in /usr/lib/x86_64-linux-gnu/libibverbs.so.1.14.39.0)
+==18230==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18227==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18227==    by 0x6EF7E57: dlclose@@GLIBC_2.34 (dlclose.c:31)
+==18227==    by 0x70A2BCF: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18227==    by 0x70ADAC3: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18227==    by 0x709AAB7: hwloc_topology_destroy (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18227==    by 0x4A98105: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x4006567: call_init (dl-init.c:33)
+==18230==    by 0x4006567: _dl_init (dl-init.c:117)
+==18230==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18230== 
+==18230== 30 bytes in 1 blocks are still reachable in loss record 8 of 15
+==18230==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x4947025: PMPI_Finalize (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18227== 
+==18227== 73 bytes in 2 blocks are still reachable in loss record 10 of 15
+==18227==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x40271DF: malloc (rtld-malloc.h:56)
+==18227==    by 0x40271DF: strdup (strdup.c:42)
+==18230==    by 0x74434E6: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18230==    by 0x74458F5: ??? (in /usr/lib/x86_64-linux-gnu/libpsm2.so.2.2)
+==18230==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18230==    by 0x4006567: call_init (dl-init.c:33)
+==18230==    by 0x4006567: _dl_init (dl-init.c:117)
+==18230==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==18230== 
+==18227==    by 0x4016A66: _dl_load_cache_lookup (dl-cache.c:527)
+==18227==    by 0x400A981: _dl_map_object (dl-load.c:2193)
+==18227==    by 0x4003494: openaux (dl-deps.c:64)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18227==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230== 64 bytes in 2 blocks are still reachable in loss record 9 of 15
+==18230==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x40028EF: malloc (rtld-malloc.h:56)
+==18230==    by 0x40028EF: _dl_close_worker.part.0.isra.0 (dl-close.c:383)
+==18230==    by 0x40032A1: _dl_close_worker (dl-close.c:150)
+==18230==    by 0x40032A1: _dl_close (dl-close.c:818)
+==18227==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18227== 
+==18227== 73 bytes in 2 blocks are still reachable in loss record 11 of 15
+==18227==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18230==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18230==    by 0x6EF7E57: dlclose@@GLIBC_2.34 (dlclose.c:31)
+==18230==    by 0x70A2BCF: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18227==    by 0x400DD20: malloc (rtld-malloc.h:56)
+==18227==    by 0x400DD20: _dl_new_object (dl-object.c:199)
+==18227==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18227==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18227==    by 0x4003494: openaux (dl-deps.c:64)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18227==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x70ADAC3: ??? (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18230==    by 0x709AAB7: hwloc_topology_destroy (in /usr/lib/x86_64-linux-gnu/libhwloc.so.15.5.2)
+==18230==    by 0x4A98105: ??? (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230==    by 0x4947025: PMPI_Finalize (in /usr/lib/x86_64-linux-gnu/libmpich.so.12.2.0)
+==18230== 
+==18230== 73 bytes in 2 blocks are still reachable in loss record 10 of 15
+==18227==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18227== 
+==18227== 2,136 bytes in 2 blocks are still reachable in loss record 12 of 15
+==18227==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x40271DF: malloc (rtld-malloc.h:56)
+==18230==    by 0x40271DF: strdup (strdup.c:42)
+==18230==    by 0x4016A66: _dl_load_cache_lookup (dl-cache.c:527)
+==18230==    by 0x400A981: _dl_map_object (dl-load.c:2193)
+==18230==    by 0x4003494: openaux (dl-deps.c:64)
+==18227==    by 0x40162DC: calloc (rtld-malloc.h:44)
+==18227==    by 0x40162DC: _dl_check_map_versions (dl-version.c:273)
+==18227==    by 0x400ED13: dl_open_worker_begin (dl-open.c:600)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18230==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18227==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18227==    by 0x6EF86C7: dlopen_implementation (dlopen.c:71)
+==18227==    by 0x6EF86C7: dlopen@@GLIBC_2.34 (dlopen.c:81)
+==18227== 
+==18227== 2,413 bytes in 2 blocks are still reachable in loss record 13 of 15
+==18230==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18230== 
+==18230== 73 bytes in 2 blocks are still reachable in loss record 11 of 15
+==18230==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x400DD20: malloc (rtld-malloc.h:56)
+==18230==    by 0x400DD20: _dl_new_object (dl-object.c:199)
+==18227==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x400DA02: calloc (rtld-malloc.h:44)
+==18227==    by 0x400DA02: _dl_new_object (dl-object.c:92)
+==18227==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18227==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18227==    by 0x4003494: openaux (dl-deps.c:64)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18227==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18230==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18230==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18230==    by 0x4003494: openaux (dl-deps.c:64)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18230==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18227== 
+==18227== 4,064 bytes in 1 blocks are still reachable in loss record 14 of 15
+==18227==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18230== 
+==18230== 2,136 bytes in 2 blocks are still reachable in loss record 12 of 15
+==18230==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x400BEA6: calloc (rtld-malloc.h:44)
+==18227==    by 0x400BEA6: do_lookup_unique (dl-lookup.c:271)
+==18227==    by 0x400BEA6: do_lookup_x (dl-lookup.c:556)
+==18227==    by 0x400C210: _dl_lookup_symbol_x (dl-lookup.c:860)
+==18227==    by 0x40114E7: elf_machine_rela (dl-machine.h:294)
+==18227==    by 0x40114E7: elf_dynamic_do_Rela (do-rel.h:142)
+==18227==    by 0x40114E7: _dl_relocate_object (dl-reloc.c:288)
+==18227==    by 0x400EBAD: dl_open_worker_begin (dl-open.c:702)
+==18230==    by 0x40162DC: calloc (rtld-malloc.h:44)
+==18230==    by 0x40162DC: _dl_check_map_versions (dl-version.c:273)
+==18230==    by 0x400ED13: dl_open_worker_begin (dl-open.c:600)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18227==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18227== 
+==18227== 72,704 bytes in 1 blocks are still reachable in loss record 15 of 15
+==18230==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18230==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18230==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18230==    by 0x6EF86C7: dlopen_implementation (dlopen.c:71)
+==18227==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18227==    by 0x9C36939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==18227==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18227==    by 0x4006567: call_init (dl-init.c:33)
+==18227==    by 0x4006567: _dl_init (dl-init.c:117)
+==18227==    by 0x6FDC904: _dl_catch_exception (dl-error-skeleton.c:182)
+==18227==    by 0x400DFF5: dl_open_worker (dl-open.c:808)
+==18227==    by 0x400DFF5: dl_open_worker (dl-open.c:771)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x6EF86C7: dlopen@@GLIBC_2.34 (dlopen.c:81)
+==18230== 
+==18230== 2,413 bytes in 2 blocks are still reachable in loss record 13 of 15
+==18230==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x400DA02: calloc (rtld-malloc.h:44)
+==18227==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18227==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18227==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18227==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18227==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18227== 
+==18227== LEAK SUMMARY:
+==18227==    definitely lost: 0 bytes in 0 blocks
+==18227==    indirectly lost: 0 bytes in 0 blocks
+==18227==      possibly lost: 0 bytes in 0 blocks
+==18230==    by 0x400DA02: _dl_new_object (dl-object.c:92)
+==18230==    by 0x4008C82: _dl_map_object_from_fd (dl-load.c:1063)
+==18230==    by 0x400A600: _dl_map_object (dl-load.c:2327)
+==18230==    by 0x4003494: openaux (dl-deps.c:64)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==18230==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==18227==    still reachable: 81,635 bytes in 20 blocks
+==18227==         suppressed: 0 bytes in 0 blocks
+==18227== 
+==18227== For lists of detected and suppressed errors, rerun with: -s
+==18227== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18230== 
+==18230== 4,064 bytes in 1 blocks are still reachable in loss record 14 of 15
+==18230==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x400BEA6: calloc (rtld-malloc.h:44)
+==18230==    by 0x400BEA6: do_lookup_unique (dl-lookup.c:271)
+==18230==    by 0x400BEA6: do_lookup_x (dl-lookup.c:556)
+==18230==    by 0x400C210: _dl_lookup_symbol_x (dl-lookup.c:860)
+==18230==    by 0x40114E7: elf_machine_rela (dl-machine.h:294)
+==18230==    by 0x40114E7: elf_dynamic_do_Rela (do-rel.h:142)
+==18230==    by 0x40114E7: _dl_relocate_object (dl-reloc.c:288)
+==18230==    by 0x400EBAD: dl_open_worker_begin (dl-open.c:702)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18230==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18230== 
+==18230== 72,704 bytes in 1 blocks are still reachable in loss record 15 of 15
+==18230==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18230==    by 0x9C36939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==18230==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==18230==    by 0x4006567: call_init (dl-init.c:33)
+==18230==    by 0x4006567: _dl_init (dl-init.c:117)
+==18230==    by 0x6FDC904: _dl_catch_exception (dl-error-skeleton.c:182)
+==18230==    by 0x400DFF5: dl_open_worker (dl-open.c:808)
+==18230==    by 0x400DFF5: dl_open_worker (dl-open.c:771)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x400E34D: _dl_open (dl-open.c:883)
+==18230==    by 0x6EF863B: dlopen_doit (dlopen.c:56)
+==18230==    by 0x6FDC8A7: _dl_catch_exception (dl-error-skeleton.c:208)
+==18230==    by 0x6FDC972: _dl_catch_error (dl-error-skeleton.c:227)
+==18230==    by 0x6EF812D: _dlerror_run (dlerror.c:138)
+==18230== 
+==18230== LEAK SUMMARY:
+==18230==    definitely lost: 0 bytes in 0 blocks
+==18230==    indirectly lost: 0 bytes in 0 blocks
+==18230==      possibly lost: 0 bytes in 0 blocks
+==18230==    still reachable: 81,635 bytes in 20 blocks
+==18230==         suppressed: 0 bytes in 0 blocks
+==18230== 
+==18230== For lists of detected and suppressed errors, rerun with: -s
+==18230== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

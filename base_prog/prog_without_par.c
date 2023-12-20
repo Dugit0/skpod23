@@ -65,9 +65,11 @@ void printa() {
     for (i = 0; i <= N - 1; i++) {
         for (j = 0; j <= N - 1; j++) {
             for (k = 0; k <= N - 1; k++) {
-                printf("%f ", A[i][j][k]);
+                printf("%5.2f ", A[i][j][k]);
             }
+            printf("\n");
         }
+        printf("=======================\n");
     }
     return;
 }
@@ -77,12 +79,14 @@ int main(int an, char **as) {
     double start = omp_get_wtime();
     int it;
     init();
-    for (it=1; it<=itmax; it++) {
+    /* for (it=1; it<=itmax; it++) { */
+    for (it=1; it<=1; it++) {
         eps = 0.;
         relax();
         if (eps < maxeps) {
             break;
         }
+        printa();
     }
     verify();
     double end = omp_get_wtime();
