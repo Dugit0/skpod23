@@ -22,6 +22,7 @@ void init() {
                 } else {
                     A[i][j][k] = (4. + i + j + k);
                 }
+                // printf("%f\n", A[i][j][k]);
             }
         }
     }
@@ -53,10 +54,11 @@ void verify()
         for (j = 0; j <= N - 1; j++) {
             for (k = 0; k <= N - 1; k++) {
                 s = s + A[i][j][k]*(i+1)*(j+1)*(k+1)/(N*N*N);
+                // printf("%f\n", s);
             }
         }
     }
-    printf("  S = %f\n",s);
+    printf("S = %f\n",s);
 }
 
 
@@ -74,19 +76,20 @@ void printa() {
 }
 
 
-int main(int an, char **as) {
+int main(void) {
     double start = omp_get_wtime();
-    int it;
     init();
-    /* for (it=1; it<=itmax; it++) { */
-    for (it=1; it<=1; it++) {
-        eps = 0.;
-        relax();
-        if (eps < maxeps) {
-            break;
-        }
-        printa();
-    }
+    eps = 0.;
+    relax();
+    printf("eps = %f\n", eps);
+    // for (int it=1; it<=itmax; it++) {
+    //     eps = 0.;
+    //     relax();
+    //     if (eps < maxeps) {
+    //         break;
+    //     }
+    //     printa();
+    // }
     verify();
     double end = omp_get_wtime();
     printf("Time = %f\n", end - start);
