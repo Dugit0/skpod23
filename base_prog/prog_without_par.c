@@ -57,7 +57,6 @@ void verify()
         }
     }
     printf("  S = %f\n",s);
-
 }
 
 
