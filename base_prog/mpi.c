@@ -601,7 +601,6 @@ int main(int argc, char **argv) {
 
     MPI_Barrier(MPI_COMM_WORLD);
     
-    // if (rank == 0) while (1) {}
     for (int it = 1; it <= itmax; it++) {
         eps = 0.;
         double proc_eps = 0.;
@@ -612,39 +611,24 @@ int main(int argc, char **argv) {
         MPI_Barrier(MPI_COMM_WORLD);
         MPI_Allreduce(&proc_eps, &eps, 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD);
         MPI_Barrier(MPI_COMM_WORLD);
-        if (rank == 0) {
-            printf("eps = %f\n", eps);
-        }
+        // if (rank == 0) {
+        //     printf("eps = %f\n", eps);
+        // }
         if (eps < maxeps) {
             break;
         }
     }
 
-
-    // for (it = 1; it <= 1; it++) {
-    // for (int it = 1; it <= itmax; it++) {
-    //     // eps = 0.;
-    //     double local_eps = 0.;
-    //     for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_threads) {
-    //         relax(metadata[cur_cube]);
-    //     }
-    //     MPI_Allreduce(&local_eps, &eps, 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD);
-    //     MPI_Barrier(MPI_COMM_WORLD);
-    //     if (eps < maxeps) {
-    //         break;
-    //     }
-    // }
-    // 
     double s = 0.;
     for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_threads) {
         s += verify(metadata[cur_cube]);
     }
-    printf("Proc %d/%d: s = %f\n", rank, num_threads, s);
+    // printf("Proc %d/%d: s = %f\n", rank, num_threads, s);
     MPI_Reduce(&s, &check_sum, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
     MPI_Barrier(MPI_COMM_WORLD);
     if (rank == 0) {
         end = MPI_Wtime();
-        printf("check_sum = %lf\n", check_sum);
+        // printf("check_sum = %lf\n", check_sum);
         printf("Time = %f, num_threads = %d\n", end - start, num_threads);
     }
     for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_threads) {
