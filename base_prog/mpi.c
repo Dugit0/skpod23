@@ -4,7 +4,7 @@
 #include <stdio.h>
 #define Max(a, b) (((a) > (b)) ? (a) : (b))
 #define Min(a, b) (((a) < (b)) ? (a) : (b))
-#define  debug 1
+#define  debug 0
 
 
 typedef struct {
@@ -33,9 +33,9 @@ typedef struct {
 } Info;
 
 
-int N = 10;
+int N;
 int M;
-int m = 5;
+int m;
 double maxeps = 0.1e-7;
 int itmax = 100;
 double check_sum = 0.;
@@ -139,11 +139,82 @@ void free_cube(Info info) {
 
 
 double relax(Info info) {
+    
+    // Отправка в предыдущий для вычислений в нем
+    // по оси i
+    if (info.recv_from.i != -1) {
+        if (debug >= 5)
+            printf("%d/%d: Send to prev for calc i\n", rank, num_threads);
+        int message_len = info.len.j * info.len.k;
+        double *send_buf = calloc(message_len, sizeof(*send_buf));
+        int i = 0;
+        for (int j = 0; j < info.len.j; j++) {
+            for (int k = 0; k < info.len.k; k++) {
+                int ind = j * info.len.k + k;
+                send_buf[ind] = info.cube[i][j][k];
+            }
+        }
+        int recv_check = 0;
+        MPI_Status status;
+        MPI_Sendrecv(send_buf, message_len, MPI_DOUBLE, info.recv_from.i, 0,
+                &recv_check, 1, MPI_INT, info.recv_from.i, 0,
+                MPI_COMM_WORLD, &status);
+        free(send_buf);
+    }
+    // по оси j
+    if (info.recv_from.j != -1) {
+        if (debug >= 5)
+            printf("%d/%d: Send to prev for calc j\n", rank, num_threads);
+        int message_len = info.len.i * info.len.k;
+        double *send_buf = calloc(message_len, sizeof(*send_buf));
+        int j = 0;
+        for (int i = 0; i < info.len.i; i++) {
+            for (int k = 0; k < info.len.k; k++) {
+                int ind = i * info.len.k + k;
+                send_buf[ind] = info.cube[i][j][k];
+            }
+        }
+        int recv_check = 0;
+        MPI_Status status;
+        MPI_Sendrecv(send_buf, message_len, MPI_DOUBLE, info.recv_from.j, 0,
+                &recv_check, 1, MPI_INT, info.recv_from.j, 0,
+                MPI_COMM_WORLD, &status);
+        free(send_buf);
+    }
+    // по оси k
+    if (info.recv_from.k != -1) {
+        if (debug >= 5)
+            printf("%d/%d: Send to prev for calc k\n", rank, num_threads);
+        int message_len = info.len.i * info.len.j;
+        double *send_buf = calloc(message_len, sizeof(*send_buf));
+        int k = 0;
+        for (int i = 0; i < info.len.i; i++) {
+            for (int j = 0; j < info.len.j; j++) {
+                int ind = i * info.len.j + j;
+                send_buf[ind] = info.cube[i][j][k];
+            }
+        }
+        int recv_check = 0;
+        MPI_Status status;
+        MPI_Sendrecv(send_buf, message_len, MPI_DOUBLE, info.recv_from.k, 0,
+                &recv_check, 1, MPI_INT, info.recv_from.k, 0,
+                MPI_COMM_WORLD, &status);
+        free(send_buf);
+    }
+
+    // Формирование рабочего буфера
     int real_len_i = (info.recv_from.i == -1) ? info.len.i : (info.len.i + 1);
     int real_len_j = (info.recv_from.j == -1) ? info.len.j : (info.len.j + 1);
     int real_len_k = (info.recv_from.k == -1) ? info.len.k : (info.len.k + 1);
     
+    real_len_i = (info.send_to.i == -1) ? real_len_i : (real_len_i + 1);
+    real_len_j = (info.send_to.j == -1) ? real_len_j : (real_len_j + 1);
+    real_len_k = (info.send_to.k == -1) ? real_len_k : (real_len_k + 1);
+    
     // Выделение рабочего буфера
+    if (debug >= 5)
+        printf("%d/%d: Alloc work buf\n", rank, num_threads);
+    
     double ***work_buf = calloc(real_len_i, sizeof(*work_buf));
     for (int i = 0; i < real_len_i; i++) {
         work_buf[i] = calloc(real_len_j, sizeof(*(work_buf[i])));
@@ -151,75 +222,221 @@ double relax(Info info) {
             work_buf[i][j] = calloc(real_len_k, sizeof(*(work_buf[i][j])));
         }
     }
-    
-
-    // Синхронизация с предыдущим
-    // по оси i
-    int message_len = info.len.j * info.len.k;
-    double *recv_buf = calloc(message_len, sizeof(*recv_buf));
-    if (info.recv_from.i == -1) {
-        for (int ind = 0; ind < message_len; ind++) {
-            recv_buf[ind] = 0;
-        }
-    } else {
-        MPI_Status status;
-        MPI_Recv(recv_buf, message_len, MPI_DOUBLE,
-                info.recv_from.i, 0, MPI_COMM_WORLD, &status);
-        int send_check = 1;
-        MPI_Send(&send_check, 1, MPI_INT, info.recv_from.i, 0, MPI_COMM_WORLD);
-    }
-    int i = 0;
-    for (int j = 0; j < info.len.j; j++) {
-        for (int k = 0; k < info.len.k; k++) {
-            int ind = j * info.len.k + k;
-            work_buf[i][j][k] = recv_buf[ind];
-        }
-    }
-    free(recv_buf);
-
-    // по оси j
-
+   
+    // Получение из последующих невычисленных
     // по оси k
+    if (debug >= 5)
+        printf("%d/%d: Recv from next, what not calc k\n", rank, num_threads);
+    {
+        int message_len = info.len.i * info.len.j;
+        double *recv_buf = calloc(message_len, sizeof(*recv_buf));
+        if (info.send_to.k == -1) {
+            for (int ind = 0; ind < message_len; ind++) {
+                recv_buf[ind] = 0;
+            }
+        } else {
+            MPI_Status status;
+            MPI_Recv(recv_buf, message_len, MPI_DOUBLE,
+                    info.send_to.k, 0, MPI_COMM_WORLD, &status);
+            int send_check = 1;
+            MPI_Send(&send_check, 1, MPI_INT, info.send_to.k, 0, MPI_COMM_WORLD);
+        }
+        int k = real_len_k - 1;
+        for (int i = 0; i < info.len.i; i++) {
+            for (int j = 0; j < info.len.j; j++) {
+                int ind = i * info.len.j + j;
+                work_buf[i][j][k] = recv_buf[ind];
+            }
+        }
+        free(recv_buf);
+    }
+    // по оси j
+    if (debug >= 5)
+        printf("%d/%d: Recv from next, what not calc j\n", rank, num_threads);
+    {
+        int message_len = info.len.i * info.len.k;
+        double *recv_buf = calloc(message_len, sizeof(*recv_buf));
+        if (info.send_to.j == -1) {
+            for (int ind = 0; ind < message_len; ind++) {
+                recv_buf[ind] = 0;
+            }
+        } else {
+            MPI_Status status;
+            MPI_Recv(recv_buf, message_len, MPI_DOUBLE,
+                    info.send_to.j, 0, MPI_COMM_WORLD, &status);
+            int send_check = 1;
+            MPI_Send(&send_check, 1, MPI_INT, info.send_to.j, 0, MPI_COMM_WORLD);
+        }
+        int j = real_len_j - 1;
+        for (int i = 0; i < info.len.i; i++) {
+            for (int k = 0; k < info.len.k; k++) {
+                int ind = i * info.len.k + k;
+                work_buf[i][j][k] = recv_buf[ind];
+            }
+        }
+        free(recv_buf);
+    }
+    // по оси i
+    if (debug >= 5)
+        printf("%d/%d: Recv from next, what not calc i\n", rank, num_threads);
+    {
+        int message_len = info.len.j * info.len.k;
+        double *recv_buf = calloc(message_len, sizeof(*recv_buf));
+        if (info.send_to.i == -1) {
+            for (int ind = 0; ind < message_len; ind++) {
+                recv_buf[ind] = 0;
+            }
+        } else {
+            MPI_Status status;
+            MPI_Recv(recv_buf, message_len, MPI_DOUBLE,
+                    info.send_to.i, 0, MPI_COMM_WORLD, &status);
+            int send_check = 1;
+            MPI_Send(&send_check, 1, MPI_INT, info.send_to.i, 0, MPI_COMM_WORLD);
+        }
+        int i = real_len_i - 1;
+        for (int j = 0; j < info.len.j; j++) {
+            for (int k = 0; k < info.len.k; k++) {
+                int ind = j * info.len.k + k;
+                work_buf[i][j][k] = recv_buf[ind];
+            }
+        }
+        free(recv_buf);
+    }
+
+
+    // Получение из предыдущих вычисленных
+    // по оси i
+    if (debug >= 5)
+        printf("%d/%d: Recv from prev, what calc i\n", rank, num_threads);
+    {
+        int message_len = info.len.j * info.len.k;
+        double *recv_buf = calloc(message_len, sizeof(*recv_buf));
+        if (info.recv_from.i == -1) {
+            for (int ind = 0; ind < message_len; ind++) {
+                recv_buf[ind] = 0;
+            }
+        } else {
+            MPI_Status status;
+            MPI_Recv(recv_buf, message_len, MPI_DOUBLE,
+                    info.recv_from.i, 0, MPI_COMM_WORLD, &status);
+            int send_check = 1;
+            MPI_Send(&send_check, 1, MPI_INT, info.recv_from.i, 0, MPI_COMM_WORLD);
+        }
+        int i = 0;
+        for (int j = 0; j < info.len.j; j++) {
+            for (int k = 0; k < info.len.k; k++) {
+                int ind = j * info.len.k + k;
+                work_buf[i][j][k] = recv_buf[ind];
+            }
+        }
+        free(recv_buf);
+    }
+    // по оси j
+    if (debug >= 5)
+        printf("%d/%d: Recv from prev, what calc j\n", rank, num_threads);
+    {
+        int message_len = info.len.i * info.len.k;
+        double *recv_buf = calloc(message_len, sizeof(*recv_buf));
+        if (info.recv_from.j == -1) {
+            for (int ind = 0; ind < message_len; ind++) {
+                recv_buf[ind] = 0;
+            }
+        } else {
+            MPI_Status status;
+            MPI_Recv(recv_buf, message_len, MPI_DOUBLE,
+                    info.recv_from.j, 0, MPI_COMM_WORLD, &status);
+            int send_check = 1;
+            MPI_Send(&send_check, 1, MPI_INT, info.recv_from.j, 0, MPI_COMM_WORLD);
+        }
+        int j = 0;
+        for (int i = 0; i < info.len.i; i++) {
+            for (int k = 0; k < info.len.k; k++) {
+                int ind = i * info.len.k + k;
+                work_buf[i][j][k] = recv_buf[ind];
+            }
+        }
+        free(recv_buf);
+    }
+    // по оси k
+    if (debug >= 5)
+        printf("%d/%d: Recv from prev, what calc k\n", rank, num_threads);
+    {
+        int message_len = info.len.i * info.len.j;
+        double *recv_buf = calloc(message_len, sizeof(*recv_buf));
+        if (info.recv_from.k == -1) {
+            for (int ind = 0; ind < message_len; ind++) {
+                recv_buf[ind] = 0;
+            }
+        } else {
+            MPI_Status status;
+            MPI_Recv(recv_buf, message_len, MPI_DOUBLE,
+                    info.recv_from.k, 0, MPI_COMM_WORLD, &status);
+            int send_check = 1;
+            MPI_Send(&send_check, 1, MPI_INT, info.recv_from.k, 0, MPI_COMM_WORLD);
+        }
+        int k = 0;
+        for (int i = 0; i < info.len.i; i++) {
+            for (int j = 0; j < info.len.j; j++) {
+                int ind = i * info.len.j + j;
+                work_buf[i][j][k] = recv_buf[ind];
+            }
+        }
+        free(recv_buf);
+    }
 
 
     // Копирование в рабочий буфер
+    if (debug >= 5)
+        printf("%d/%d: Copy to work buf\n", rank, num_threads);
     for (int i = 0; i < info.len.i; i++) {
         for (int j = 0; j < info.len.j; j++) {
             for (int k = 0; k < info.len.k; k++) {
-                int work_i = i + real_len_i - info.len.i;
-                int work_j = j + real_len_j - info.len.j;
-                int work_k = k + real_len_k - info.len.k;
+                int shift_i = (info.recv_from.i == -1) ? 0 : 1;
+                int shift_j = (info.recv_from.j == -1) ? 0 : 1;
+                int shift_k = (info.recv_from.k == -1) ? 0 : 1;
+                int work_i = i + shift_i;
+                int work_j = j + shift_j;
+                int work_k = k + shift_k;
                 work_buf[work_i][work_j][work_k] = info.cube[i][j][k];
             }
         }
     }
     
     // Релаксация
+    if (debug >= 5)
+        printf("%d/%d: Relax\n", rank, num_threads);
     double local_eps = 0.;
-    for (int i = 1; i < real_len_i; i++) {
-        for (int j = 1; j < real_len_j; j++) {
-            for (int k = 1; k < real_len_k; k++) {
+    for (int i = 1; i < real_len_i - 1; i++) {
+        for (int j = 1; j < real_len_j - 1; j++) {
+            for (int k = 1; k < real_len_k - 1; k++) {
                 double e;
-                e = info.cube[i][j][k];
-                info.cube[i][j][k] = (info.cube[i-1][j][k] + info.cube[i+1][j][k] + info.cube[i][j-1][k] + info.cube[i][j+1][k] + info.cube[i][j][k-1] + info.cube[i][j][k+1]) / 6.;
-                local_eps = Max(local_eps, fabs(e - info.cube[i][j][k]));
+                e = work_buf[i][j][k];
+                work_buf[i][j][k] = (work_buf[i-1][j][k] + work_buf[i+1][j][k] + work_buf[i][j-1][k] + work_buf[i][j+1][k] + work_buf[i][j][k-1] + work_buf[i][j][k+1]) / 6.;
+                local_eps = Max(local_eps, fabs(e - work_buf[i][j][k]));
             }
         }
     }
 
     // Копирование из рабочего буфера
+    if (debug >= 5)
+        printf("%d/%d: Copy from work buf\n", rank, num_threads);
     for (int i = 0; i < info.len.i; i++) {
         for (int j = 0; j < info.len.j; j++) {
             for (int k = 0; k < info.len.k; k++) {
-                int work_i = i + real_len_i - info.len.i;
-                int work_j = j + real_len_j - info.len.j;
-                int work_k = k + real_len_k - info.len.k;
+                int shift_i = (info.recv_from.i == -1) ? 0 : 1;
+                int shift_j = (info.recv_from.j == -1) ? 0 : 1;
+                int shift_k = (info.recv_from.k == -1) ? 0 : 1;
+                int work_i = i + shift_i;
+                int work_j = j + shift_j;
+                int work_k = k + shift_k;
                 info.cube[i][j][k] = work_buf[work_i][work_j][work_k];
             }
         }
     }
 
     // Освобождение рабочего буфера
+    if (debug >= 5)
+        printf("%d/%d: Free work_buf\n", rank, num_threads);
     for (int i = 0; i < real_len_i; i++) {
         for (int j = 0; j < real_len_j; j++) {
             free(work_buf[i][j]);
@@ -228,18 +445,58 @@ double relax(Info info) {
     }
     free(work_buf);
     
-    // Синхронизация с последующим
+    // Отправка в последующий вычисленного
     // по оси k
+    if (info.send_to.k != -1) {
+        if (debug >= 5)
+            printf("%d/%d: Send to next k\n", rank, num_threads);
+        int message_len = info.len.i * info.len.j;
+        double *send_buf = calloc(message_len, sizeof(*send_buf));
+        int k = info.end.k;
+        for (int i = 0; i < info.len.i; i++) {
+            for (int j = 0; j < info.len.j; j++) {
+                int ind = i * info.len.j + j;
+                send_buf[ind] = info.cube[i][j][k];
+            }
+        }
+        int recv_check = 0;
+        MPI_Status status;
+        MPI_Sendrecv(send_buf, message_len, MPI_DOUBLE, info.send_to.k, 0,
+                &recv_check, 1, MPI_INT, info.send_to.k, 0,
+                MPI_COMM_WORLD, &status);
+        free(send_buf);
+    }
     // по оси j
+    if (info.send_to.j != -1) {
+        if (debug >= 5)
+            printf("%d/%d: Send to next j\n", rank, num_threads);
+        int message_len = info.len.i * info.len.k;
+        double *send_buf = calloc(message_len, sizeof(*send_buf));
+        int j = info.end.j;
+        for (int i = 0; i < info.len.i; i++) {
+            for (int k = 0; k < info.len.k; k++) {
+                int ind = i * info.len.k + k;
+                send_buf[ind] = info.cube[i][j][k];
+            }
+        }
+        int recv_check = 0;
+        MPI_Status status;
+        MPI_Sendrecv(send_buf, message_len, MPI_DOUBLE, info.send_to.j, 0,
+                &recv_check, 1, MPI_INT, info.send_to.j, 0,
+                MPI_COMM_WORLD, &status);
+        free(send_buf);
+    }
     // по оси i
     if (info.send_to.i != -1) {
+        if (debug >= 5)
+            printf("%d/%d: Send to next i\n", rank, num_threads);
         int message_len = info.len.j * info.len.k;
         double *send_buf = calloc(message_len, sizeof(*send_buf));
         int i = info.end.i;
         for (int j = 0; j < info.len.j; j++) {
             for (int k = 0; k < info.len.k; k++) {
                 int ind = j * info.len.k + k;
-                send_buf[ind] = work_buf[i][j][k];
+                send_buf[ind] = info.cube[i][j][k];
             }
         }
         int recv_check = 0;
@@ -287,7 +544,7 @@ double verify(Info info) {
 }
 
 
-void print_cube(Triplet beg, Triplet end, double ***cube);
+void print_cube(Info info);
 void print_info(Info i);
 void print_metadata(Info *metadata);
 
@@ -295,7 +552,7 @@ void print_metadata(Info *metadata);
 int main(int argc, char **argv) {
 
     // num_threads = 8;
-    
+
     int status = MPI_Init(&argc, &argv);
     if (status) { 
         printf("MPI not supported\nError with code %d\n", status);
@@ -305,8 +562,13 @@ int main(int argc, char **argv) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &num_threads);
 
+    if (debug >= 5)
+        printf("Created %d/%d\n", rank, num_threads);
+    MPI_Barrier(MPI_COMM_WORLD);
+
     // Нужно вычислять m(N, num_threads)!!!
-    m = 4;
+    N = 300;
+    m = 150;
     M = (N + m - 1) / m;
     if (rank == 0) {
         if (debug >= 1)
@@ -320,10 +582,6 @@ int main(int argc, char **argv) {
     }
     MPI_Barrier(MPI_COMM_WORLD);
 
-    if (debug >= 5)
-        printf("Created %d/%d\n", rank, num_threads);
-
-    MPI_Barrier(MPI_COMM_WORLD);
     double start, end;
     if (rank == 0) {
         start = MPI_Wtime();
@@ -340,18 +598,27 @@ int main(int argc, char **argv) {
         // printf("Proc = %d, cube = %d: (%d %d %d) -> %d\n", rank, cur_cube, metadata[cur_cube].len.i, metadata[cur_cube].len.j, metadata[cur_cube].len.k, metadata[cur_cube].len.i * metadata[cur_cube].len.j * metadata[cur_cube].len.k);
         metadata[cur_cube].cube = init(metadata[cur_cube]);
     }
+
     MPI_Barrier(MPI_COMM_WORLD);
     
-    // double proc_eps = 0.;
-    // for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_threads) {
-    //     double cur_cube_eps = relax(metadata[cur_cube]);
-    //     proc_eps = Max(proc_eps, cur_cube_eps);
-    // }
-    // MPI_Allreduce(&proc_eps, &eps, 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD);
-    // MPI_Barrier(MPI_COMM_WORLD);
-    // if (rank == 0) {
-    //     printf("eps = %f\n", eps);
-    // }
+    // if (rank == 0) while (1) {}
+    for (int it = 1; it <= itmax; it++) {
+        eps = 0.;
+        double proc_eps = 0.;
+        for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_threads) {
+            double cur_cube_eps = relax(metadata[cur_cube]);
+            proc_eps = Max(proc_eps, cur_cube_eps);
+        }
+        MPI_Barrier(MPI_COMM_WORLD);
+        MPI_Allreduce(&proc_eps, &eps, 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD);
+        MPI_Barrier(MPI_COMM_WORLD);
+        if (rank == 0) {
+            printf("eps = %f\n", eps);
+        }
+        if (eps < maxeps) {
+            break;
+        }
+    }
 
 
     // for (it = 1; it <= 1; it++) {
@@ -402,14 +669,12 @@ int main(int argc, char **argv) {
 
 // Debug print functions
 
-void print_cube(Triplet beg, Triplet end, double ***cube) {
-    int len_i = end.i - beg.i + 1;
-    int len_j = end.j - beg.j + 1;
-    int len_k = end.k - beg.k + 1;
-    for (int i = 0; i < len_i; i++) {
-        for (int j = 0; j < len_j; j++) {
-            for (int k = 0; k < len_k; k++) {
-                printf("%f ", cube[i][j][k]);
+void print_cube(Info info) {
+    print_info(info);
+    for (int i = 0; i < info.len.i; i++) {
+        for (int j = 0; j < info.len.j; j++) {
+            for (int k = 0; k < info.len.k; k++) {
+                printf("%f ", info.cube[i][j][k]);
             }
             printf("\n");
         }
@@ -419,7 +684,7 @@ void print_cube(Triplet beg, Triplet end, double ***cube) {
 
 
 void print_info(Info i) {
-    printf("rank = %d, begin = (%d %d %d), end = (%d %d %d)\nsend_to = (%d %d %d), recv_from = (%d %d %d)",
+    printf("rank = %d, begin = (%d %d %d), end = (%d %d %d)\nsend_to = (%d %d %d), recv_from = (%d %d %d)\n",
             i.proc_rank,
             i.beg.i, i.beg.j, i.beg.k,
             i.end.i, i.end.j, i.end.k,

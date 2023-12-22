@@ -90,4 +90,98 @@ Proc 6/8: s = 296.532000
 Proc 7/8: s = 137.988000
 Proc 5/8: s = 454.328000
 check_sum = 1734.656000
+
+
+
+
+
+
+Send to prev for calc i
+Recv from next, what not calc i
+Recv from prev, what calc i
+Send to next i
+
+
+
+
+0/8: Send to prev for calc i
+0/8: Send to prev for calc j
+0/8: Send to prev for calc k
+0/8: Alloc work buf
+0/8: Recv from next, what not calc i
+6/8: Send to prev for calc i
+1/8: Send to prev for calc i
+1/8: Send to prev for calc j
+1/8: Send to prev for calc k
+1/8: Alloc work buf
+1/8: Recv from next, what not calc i
+2/8: Send to prev for calc i
+2/8: Send to prev for calc j
+3/8: Send to prev for calc i
+3/8: Send to prev for calc j
+4/8: Send to prev for calc i
+5/8: Send to prev for calc i
+7/8: Send to prev for calc i
+1/8: Recv from next, what not calc j
+1/8: Recv from next, what not calc k
+1/8: Recv from prev, what calc i
+5/8: Send to prev for calc j
+5/8: Send to prev for calc k
+5/8: Alloc work buf
+1/8: Recv from prev, what calc j
+1/8: Recv from prev, what calc k
+3/8: Send to prev for calc k
+5/8: Recv from next, what not calc i
+5/8: Recv from next, what not calc j
+0/8: Recv from next, what not calc j
+0/8: Recv from next, what not calc k
+2/8: Send to prev for calc k
+2/8: Alloc work buf
+2/8: Recv from next, what not calc i
+4/8: Send to prev for calc j
+4/8: Send to prev for calc k
+4/8: Alloc work buf
+4/8: Recv from next, what not calc i
+4/8: Recv from next, what not calc j
+2/8: Recv from next, what not calc j
+2/8: Recv from next, what not calc k
+6/8: Send to prev for calc j
+4/8: Recv from next, what not calc k
+6/8: Send to prev for calc k
+6/8: Alloc work buf
+6/8: Recv from next, what not calc i
+6/8: Recv from next, what not calc j
+6/8: Recv from next, what not calc k
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Time = 0.018916, num_threads = 8

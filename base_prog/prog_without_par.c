@@ -4,7 +4,7 @@
 #include <stdio.h>
 #define  Max(a,b) ((a)>(b)?(a):(b))
 
-#define  N   10
+#define  N   300
 double maxeps = 0.1e-7;
 int itmax = 100;
 int i,j,k;
@@ -79,17 +79,14 @@ void printa() {
 int main(void) {
     double start = omp_get_wtime();
     init();
-    eps = 0.;
-    relax();
-    printf("eps = %f\n", eps);
-    // for (int it=1; it<=itmax; it++) {
-    //     eps = 0.;
-    //     relax();
-    //     if (eps < maxeps) {
-    //         break;
-    //     }
-    //     printa();
-    // }
+    for (int it=1; it<=itmax; it++) {
+        eps = 0.;
+        relax();
+        printf("eps = %f\n", eps);
+        if (eps < maxeps) {
+            break;
+        }
+    }
     verify();
     double end = omp_get_wtime();
     printf("Time = %f\n", end - start);
