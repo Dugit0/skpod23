@@ -102,6 +102,8 @@ int main(void) {
 
     unsigned file_version = 0;
     int vote = 1;
+    std::vector<unsigned> send_message_ids(num_threads, 0);
+    std::vector<unsigned> recv_message_ids(num_threads, 0);
 
     // Sync barrier
     if (DEBUG >= 5)
@@ -109,17 +111,26 @@ int main(void) {
     MPI_Barrier(MPI_COMM_WORLD);
 
     // Start main loop
-    unsigned i = 0;
-    while (i < LOOP_LIMIT) {
-        unsigned random_action = rand() % 10;
+    // unsigned i = 0;
+    // while (i < LOOP_LIMIT) {
+    {
+        // unsigned random_action = rand() % 10;
+        unsigned random_action = rank;
         if (random_action == 0) {
             get_timestamp(stdout, rank, "READ");
-        } else if (random_action == 1) {
-            get_timestamp(stdout, rank, "WRITE");
+            int buf = MsgCode::REQ_READ;
+            // std::vector<MPI_Request> requests(num_threads, {});
+            for (int proc = 0; proc < num_threads; proc++) {
+                MPI_Send(&buf, 1, MPI_INT, proc, send_message_ids[proc], MPI_COMM_WORLD);
+            }
+        // } else if (random_action == 1) {
+        //     get_timestamp(stdout, rank, "WRITE");
         } else {
+            get_timestamp(stdout, rank, "IDLE");
             sleep(1);
         }
-        i++;
+        MPI_Barrier(MPI_COMM_WORLD);
+        // i++;
     }
 
     // printf("Proc: %d, Rand: %d\n", rank, rand() % 100);
