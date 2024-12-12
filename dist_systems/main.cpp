@@ -13,13 +13,11 @@
 #include <unistd.h>
 #include <assert.h>
 #include <math.h>
-// #define Max(a, b) (((a) > (b)) ? (a) : (b))
-// #define Min(a, b) (((a) < (b)) ? (a) : (b))
-#define DEBUG 5
 
-#if (DEBUG >= 5)
 #include "pprint.cpp"
-#endif
+
+#define DEBUG 0
+
 
 unsigned SECONDS_IN_DAY = 24*60*60;
 unsigned SECONDS_IN_HOUR = 60*60;
@@ -72,15 +70,12 @@ std::vector<unsigned> get_random_threads(unsigned n, unsigned num_threads, unsig
 // }
 
 
-void send_recv_quorum(
-        std::string quorum_type,
-        int rank,
-        int num_threads,
-        std::vector<int>& REQ_recv_buf,
-        std::vector<MPI_Request>& REQ_requests,
-        std::vector<MPI_Status>& REQ_statuses
-        ) {
-
+void send_recv_quorum(std::string quorum_type,
+                      int rank,
+                      int num_threads,
+                      std::vector<int>& REQ_recv_buf,
+                      std::vector<MPI_Request>& REQ_requests,
+                      std::vector<MPI_Status>& REQ_statuses) {
     // Choice quorum type
     int buf;
     unsigned quorum;
@@ -119,8 +114,8 @@ void send_recv_quorum(
     // Wait until all responses are received
     // And reject any requests (deadlock protection)
     while (true) {
-        if (DEBUG >= 5)
-            printf("%d/%d: Wait until all responses are received\n", rank, num_threads);
+        // if (DEBUG >= 5)
+        //     printf("%d/%d: Wait until all responses are received\n", rank, num_threads);
 
         // Test that all responses are received
         int all_resp_received = 0;
@@ -182,13 +177,14 @@ void send_recv_quorum(
             printf("%d/%d: Succes READ file %d\n",
                    rank, num_threads, newest_file_version);
         } else {
+            newest_file_version += 1; // Update file version
             printf("%d/%d: Succes WRITE file %d. New version is %d\n",
-                   rank, num_threads, newest_file_version, newest_file_version + 1);
+                   rank, num_threads, newest_file_version, newest_file_version);
         }
 
         // RETURN_BACK votes
         for (auto proc: threads) {
-            int buf = 1;
+            int buf = newest_file_version;
             MPI_Send(&buf, 1, MPI_INT,
                      proc, MsgType::RETURN_BACK, MPI_COMM_WORLD);
         }
@@ -205,7 +201,7 @@ void send_recv_quorum(
         // RETURN_BACK votes
         for (unsigned i = 0; i < RESP_recv_buf.size(); i++) {
             if (RESP_recv_buf[i][0]) {
-                int buf = 1;
+                int buf = 0;
                 MPI_Send(&buf, 1, MPI_INT,
                          threads[i], MsgType::RETURN_BACK, MPI_COMM_WORLD);
             }
@@ -214,6 +210,74 @@ void send_recv_quorum(
 }
 
 
+void idle(int rank,
+          int num_threads,
+          int& vote,
+          int& file_version,
+          std::vector<int>& REQ_recv_buf,
+          std::vector<MPI_Request>& REQ_requests,
+          std::vector<MPI_Status>& REQ_statuses) {
+    int RETURN_BACK_recv_buf{};
+    MPI_Request RETURN_BACK_request{};
+    MPI_Status RETURN_BACK_status{};
+
+    int idle_iteration = 0;
+    while (true) {
+        // If vote == 0, try return back vote
+        // And update version if file was written
+        if (!vote) {
+            int response_received = 0;
+            MPI_Test(&RETURN_BACK_request, &response_received,
+                     &RETURN_BACK_status);
+            if (response_received) {
+                if (DEBUG >= 5)
+                    printf("%d/%d: Vote was returned back\n", rank, num_threads);
+                vote = 1;
+                file_version = std::max(file_version, RETURN_BACK_recv_buf);
+            }
+        }
+
+        // Endless IDLE protection
+        if (idle_iteration > 0 && vote) {
+            // if (DEBUG >= 5)
+            //     printf("%d/%d: Stop IDLE\n", rank, num_threads);
+            return;
+        }
+        idle_iteration++;
+
+        int any_req_received = 0;
+        int index;
+        MPI_Testany(REQ_requests.size(), &REQ_requests.front(), &index,
+                    &any_req_received, &REQ_statuses.front());
+        if (!any_req_received) {
+            continue;
+        } else {
+            if (DEBUG >= 5)
+                printf("%d/%d: Received REQ\n", rank, num_threads);
+            if (vote) {
+                vote = 0;
+                MPI_Irecv(&RETURN_BACK_recv_buf, 1, MPI_INT,
+                          index, MsgType::RETURN_BACK, MPI_COMM_WORLD,
+                          &RETURN_BACK_request);
+                int send_buf[2] = {RespType::ACCEPT, file_version};
+                MPI_Send(&send_buf, 2, MPI_INT,
+                         index, MsgType::RESP, MPI_COMM_WORLD);
+                printf("%d/%d: REQ from %d. ACCEPT\n",
+                       rank, num_threads, index);
+            } else {
+                int send_buf[2] = {RespType::REJECT, file_version};
+                MPI_Send(&send_buf, 2, MPI_INT,
+                         index, MsgType::RESP, MPI_COMM_WORLD);
+                printf("%d/%d: REQ from %d. REJECT\n",
+                       rank, num_threads, index);
+
+            }
+            MPI_Irecv(&REQ_recv_buf[index], 1, MPI_INT,
+                      index, MsgType::REQ, MPI_COMM_WORLD,
+                      &REQ_requests[index]);
+        }
+    }
+}
 
 int main(void) {
     // Init MPI
@@ -261,104 +325,45 @@ int main(void) {
 
     // Start main loop
     while (true) {
+        usleep(1000);
         // Choice random action
-        unsigned random_action = rand() % 100;
+        unsigned random_action = rand() % 2000;
         // unsigned random_action = rank;  // Debug random lock
 
+        // if (rank < 2 && random_action == 0) {
         if (random_action == 0) {
             // READ
             printf("%d/%d: Want READ\n", rank, num_threads);
-            send_recv_quorum(
-                    "READ",
-                    rank,
-                    num_threads,
-                    REQ_recv_buf,
-                    REQ_requests,
-                    REQ_statuses
-                    );
+            send_recv_quorum("READ",
+                             rank,
+                             num_threads,
+                             REQ_recv_buf,
+                             REQ_requests,
+                             REQ_statuses);
         } else if (random_action == 1) {
             // WRITE
             printf("%d/%d: Want WRITE\n", rank, num_threads);
             sleep(1);
-            send_recv_quorum(
-                    "WRITE",
-                    rank,
-                    num_threads,
-                    REQ_recv_buf,
-                    REQ_requests,
-                    REQ_statuses
-                    );
+            send_recv_quorum("WRITE",
+                             rank,
+                             num_threads,
+                             REQ_recv_buf,
+                             REQ_requests,
+                             REQ_statuses);
         } else {
             // IDLE
-            printf("%d/%d: IDLE\n", rank, num_threads);
-            int RETURN_BACK_recv_buf{};
-            MPI_Request RETURN_BACK_request{};
-            MPI_Status RETURN_BACK_status{};
-            int vote_for_write = 0;
-
-            int idle_iteration = 0;
-            while (true) {
-                // If vote == 0, try return back vote
-                // And update version if file was written
-                if (!vote) {
-                    int response_received = 0;
-                    MPI_Test(&RETURN_BACK_request, &response_received,
-                             &RETURN_BACK_status);
-                    if (response_received) {
-                        vote = 1;
-                        if (vote_for_write) {
-                            file_version++;
-                        }
-                    }
-                }
-
-                // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                // Endless IDLE protection (MAYBE NOT WORK)
-                if (idle_iteration > 0 && vote) {
-                    break;
-                }
-                idle_iteration++;
-
-                int any_req_received = 0;
-                int index;
-                MPI_Testany(REQ_requests.size(), &REQ_requests.front(), &index,
-                            &any_req_received, &REQ_statuses.front());
-                if (!any_req_received) {
-                    continue;
-                } else {
-                    if (vote) {
-                        vote = 0;
-                        if (REQ_recv_buf[index] == ReqType::READ) {
-                            vote_for_write = 0;
-                        } else {
-                            vote_for_write = 1;
-                        }
-                        MPI_Irecv(&RETURN_BACK_recv_buf, 1, MPI_INT,
-                                  index, MsgType::RETURN_BACK, MPI_COMM_WORLD,
-                                  &RETURN_BACK_request);
-                        int send_buf[2] = {RespType::ACCEPT, file_version};
-                        MPI_Send(&send_buf, 2, MPI_INT,
-                                 index, MsgType::RESP, MPI_COMM_WORLD);
-                        printf("%d/%d: REQ from %d. ACCEPT\n",
-                               rank, num_threads, index);
-                    } else {
-                        int send_buf[2] = {RespType::REJECT, file_version};
-                        MPI_Send(&send_buf, 2, MPI_INT,
-                                 index, MsgType::RESP, MPI_COMM_WORLD);
-                        printf("%d/%d: REQ from %d. REJECT\n",
-                               rank, num_threads, index);
-
-                    }
-                    MPI_Irecv(&REQ_recv_buf[index], 1, MPI_INT,
-                              index, MsgType::REQ, MPI_COMM_WORLD,
-                              &REQ_requests[index]);
-                }
-            }
+            // printf("%d/%d: IDLE\n", rank, num_threads);
+            idle(rank,
+                 num_threads,
+                 vote,
+                 file_version,
+                 REQ_recv_buf,
+                 REQ_requests,
+                 REQ_statuses);
         }
-        MPI_Barrier(MPI_COMM_WORLD);
     }
 
-    MPI_Barrier(MPI_COMM_WORLD);
+    // MPI_Barrier(MPI_COMM_WORLD);
 
     // Finalize MPI
     MPI_Finalize();
