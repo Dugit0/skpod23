@@ -1,15 +1,12 @@
 #include "mpi.h"
-#include <iostream>
 #include <string>
 #include <algorithm>
 #include <random>
 #include <vector>
-#include <map>
 #include <array>
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
 #include <unistd.h>
 #include <assert.h>
 #include <math.h>
@@ -19,12 +16,9 @@
 #define DEBUG 0
 
 
-unsigned SECONDS_IN_DAY = 24*60*60;
-unsigned SECONDS_IN_HOUR = 60*60;
-unsigned SECONDS_IN_MINUTE = 60;
 unsigned READ_QUORUM = 3;
 unsigned WRITE_QUORUM = 3;
-unsigned LOOP_LIMIT = 10;
+
 
 enum MsgType {
     REQ,
@@ -32,15 +26,18 @@ enum MsgType {
     RETURN_BACK,
 };
 
+
 enum ReqType {
     READ,
     WRITE,
 };
 
+
 enum RespType {
     REJECT,
     ACCEPT,
 };
+
 
 std::vector<unsigned> get_random_threads(unsigned n, unsigned num_threads, unsigned my_num) {
     assert (n <= num_threads - 1);
@@ -55,19 +52,6 @@ std::vector<unsigned> get_random_threads(unsigned n, unsigned num_threads, unsig
     std::vector<unsigned> res{container.begin(), container.begin() + n};
     return res;
 }
-
-
-// void get_timestamp(FILE* stream, int rank, std::string info="") {
-//     unsigned long cur_time = (unsigned long)time(NULL) % SECONDS_IN_DAY;
-//     unsigned hours = cur_time / SECONDS_IN_HOUR;
-//     unsigned minutes = cur_time % SECONDS_IN_HOUR / SECONDS_IN_MINUTE;
-//     unsigned seconds = cur_time % SECONDS_IN_MINUTE;
-
-//     fprintf(stream, "%02u:%02u:%02u||proc: %d||%s\n",
-//             hours, minutes, seconds, rank, info.c_str());
-//     // fflush(stream);
-//     return;
-// }
 
 
 void send_recv_quorum(std::string quorum_type,
@@ -303,10 +287,14 @@ int main(void) {
     MPI_Barrier(MPI_COMM_WORLD);
 
     // Init process variables
-    int random_seed = 42 ^ rank;
-    srand(random_seed); // Random lock
-    // printf("%d/%d: random_seed = %d\n", rank, num_threads, random_seed);
 
+    // Random lock
+    int random_seed = 42 ^ rank;
+    srand(random_seed);
+    if (DEBUG >= 5)
+        printf("%d/%d: random_seed = %d\n", rank, num_threads, random_seed);
+
+    // Init file version and vote
     int file_version = 0;
     int vote = 1;
 
@@ -325,12 +313,13 @@ int main(void) {
 
     // Start main loop
     while (true) {
+        // Sleep for readable output
         usleep(1000);
+
         // Choice random action
         unsigned random_action = rand() % 2000;
         // unsigned random_action = rank;  // Debug random lock
 
-        // if (rank < 2 && random_action == 0) {
         if (random_action == 0) {
             // READ
             printf("%d/%d: Want READ\n", rank, num_threads);
@@ -363,12 +352,7 @@ int main(void) {
         }
     }
 
-    // MPI_Barrier(MPI_COMM_WORLD);
-
     // Finalize MPI
     MPI_Finalize();
     return 0;
 }
-
-    // if (DEBUG >= 5)
-    //     printf("%d/%d:", rank, num_threads);
