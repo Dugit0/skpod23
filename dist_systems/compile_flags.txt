@@ -1,5 +1,6 @@
 -Wall
 -Wextra
+-std=c++23
 -Wl,-Bsymbolic-functions
 -flto=auto
 -ffat-lto-objects

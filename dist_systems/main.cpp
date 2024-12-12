@@ -17,10 +17,14 @@
 // #define Min(a, b) (((a) < (b)) ? (a) : (b))
 #define DEBUG 5
 
+#if (DEBUG >= 5)
+#include "pprint.cpp"
+#endif
+
 unsigned SECONDS_IN_DAY = 24*60*60;
 unsigned SECONDS_IN_HOUR = 60*60;
 unsigned SECONDS_IN_MINUTE = 60;
-unsigned READ_QUORUM = 4;
+unsigned READ_QUORUM = 3;
 unsigned WRITE_QUORUM = 3;
 unsigned LOOP_LIMIT = 10;
 
@@ -55,28 +59,29 @@ std::vector<unsigned> get_random_threads(unsigned n, unsigned num_threads, unsig
 }
 
 
-void get_timestamp(FILE* stream, int rank, std::string info="") {
-    unsigned long cur_time = (unsigned long)time(NULL) % SECONDS_IN_DAY;
-    unsigned hours = cur_time / SECONDS_IN_HOUR;
-    unsigned minutes = cur_time % SECONDS_IN_HOUR / SECONDS_IN_MINUTE;
-    unsigned seconds = cur_time % SECONDS_IN_MINUTE;
+// void get_timestamp(FILE* stream, int rank, std::string info="") {
+//     unsigned long cur_time = (unsigned long)time(NULL) % SECONDS_IN_DAY;
+//     unsigned hours = cur_time / SECONDS_IN_HOUR;
+//     unsigned minutes = cur_time % SECONDS_IN_HOUR / SECONDS_IN_MINUTE;
+//     unsigned seconds = cur_time % SECONDS_IN_MINUTE;
 
-    fprintf(stream, "%02u:%02u:%02u||proc: %d||%s\n",
-            hours, minutes, seconds, rank, info.c_str());
-    // fflush(stream);
-    return;
-}
+//     fprintf(stream, "%02u:%02u:%02u||proc: %d||%s\n",
+//             hours, minutes, seconds, rank, info.c_str());
+//     // fflush(stream);
+//     return;
+// }
 
 
-std::vector<std::array<int, 2>> send_recv_quorum(
+void send_recv_quorum(
         std::string quorum_type,
         int rank,
         int num_threads,
-        std::vector<int> REQ_recv_buf,
-        std::vector<MPI_Request> REQ_requests,
-        std::vector<MPI_Status> REQ_statuses
+        std::vector<int>& REQ_recv_buf,
+        std::vector<MPI_Request>& REQ_requests,
+        std::vector<MPI_Status>& REQ_statuses
         ) {
 
+    // Choice quorum type
     int buf;
     unsigned quorum;
     if (quorum_type == "READ") {
@@ -87,7 +92,10 @@ std::vector<std::array<int, 2>> send_recv_quorum(
         quorum = WRITE_QUORUM;
     }
 
+    // Get numbers of threads for quorum
     auto threads = get_random_threads(quorum, num_threads, rank);
+    if (DEBUG >= 5)
+        printf("%d/%d: threads = %s\n", rank, num_threads, spprint(threads).c_str());
 
     // Send requests to READ/WRITE_QUORUM processes
     for (auto proc: threads) {
@@ -111,12 +119,17 @@ std::vector<std::array<int, 2>> send_recv_quorum(
     // Wait until all responses are received
     // And reject any requests (deadlock protection)
     while (true) {
+        if (DEBUG >= 5)
+            printf("%d/%d: Wait until all responses are received\n", rank, num_threads);
+
+        // Test that all responses are received
         int all_resp_received = 0;
         MPI_Testall(RESP_requests.size(), &RESP_requests.front(),
                     &all_resp_received, &RESP_statuses.front());
         if (all_resp_received) {
             break;
         }
+        // Reject requests while they exist
         while (true) {
             int any_req_received = 0;
             int index;
@@ -125,7 +138,8 @@ std::vector<std::array<int, 2>> send_recv_quorum(
             if (!any_req_received) {
                 break;
             } else {
-                // TODO, Maybe BSend?
+                if (DEBUG >= 5)
+                    printf("%d/%d: Reject REQ from %d\n", rank, num_threads, index);
                 int send_buf[2] = {RespType::REJECT, 0};
                 MPI_Send(&send_buf, 2, MPI_INT, index,
                          MsgType::RESP, MPI_COMM_WORLD);
@@ -135,6 +149,8 @@ std::vector<std::array<int, 2>> send_recv_quorum(
             }
         }
     }
+
+    //////////// START DEBUG ////////////
     if (DEBUG >= 5) {
         sleep(1);
         printf("Proc:\n");
@@ -146,17 +162,60 @@ std::vector<std::array<int, 2>> send_recv_quorum(
             printf("[%d, %d]\n", r[0], r[1]);
         }
     }
-    return RESP_recv_buf;
+    ///////////// END DEBUG /////////////
+
+    // Check that quorum was reached
+    int quorum_reached = 1;
+    for (unsigned i = 0; i < RESP_recv_buf.size(); i++) {
+        quorum_reached = quorum_reached && RESP_recv_buf[i][0];
+    }
+
+    if (quorum_reached) {
+        // Get max (newest) file version
+        int newest_file_version = 0;
+        for (unsigned i = 0; i < RESP_recv_buf.size(); i++) {
+            newest_file_version = std::max(newest_file_version, RESP_recv_buf[i][1]);
+        }
+
+        // READ or WRITE
+        if (quorum_type == "READ") {
+            printf("%d/%d: Succes READ file %d\n",
+                   rank, num_threads, newest_file_version);
+        } else {
+            printf("%d/%d: Succes WRITE file %d. New version is %d\n",
+                   rank, num_threads, newest_file_version, newest_file_version + 1);
+        }
+
+        // RETURN_BACK votes
+        for (auto proc: threads) {
+            int buf = 1;
+            MPI_Send(&buf, 1, MPI_INT,
+                     proc, MsgType::RETURN_BACK, MPI_COMM_WORLD);
+        }
+        return;
+    } else {
+        // Reject READ or WRITE
+        if (quorum_type == "READ") {
+            printf("%d/%d: Reject READ\n",
+                   rank, num_threads);
+        } else {
+            printf("%d/%d: Reject WRITE\n",
+                   rank, num_threads);
+        }
+        // RETURN_BACK votes
+        for (unsigned i = 0; i < RESP_recv_buf.size(); i++) {
+            if (RESP_recv_buf[i][0]) {
+                int buf = 1;
+                MPI_Send(&buf, 1, MPI_INT,
+                         threads[i], MsgType::RETURN_BACK, MPI_COMM_WORLD);
+            }
+        }
+    }
 }
 
-// void read() {
-//     return;
-// }
 
 
 int main(void) {
-
-
     // Init MPI
     int status = MPI_Init(nullptr, nullptr);
     if (status) {
@@ -180,7 +239,10 @@ int main(void) {
     MPI_Barrier(MPI_COMM_WORLD);
 
     // Init process variables
-    srand(42 ^ rank); // Random lock
+    int random_seed = 42 ^ rank;
+    srand(random_seed); // Random lock
+    // printf("%d/%d: random_seed = %d\n", rank, num_threads, random_seed);
+
     int file_version = 0;
     int vote = 1;
 
@@ -198,16 +260,14 @@ int main(void) {
     }
 
     // Start main loop
-    // unsigned iteration = 0;
-    // while (iteration < LOOP_LIMIT) {
-    {
+    while (true) {
         // Choice random action
-        // unsigned random_action = rand() % 10;
-        unsigned random_action = rank;  // Debug random lock
+        unsigned random_action = rand() % 100;
+        // unsigned random_action = rank;  // Debug random lock
 
         if (random_action == 0) {
             // READ
-            get_timestamp(stdout, rank, "READ");
+            printf("%d/%d: Want READ\n", rank, num_threads);
             send_recv_quorum(
                     "READ",
                     rank,
@@ -216,26 +276,79 @@ int main(void) {
                     REQ_requests,
                     REQ_statuses
                     );
-        // } else if (random_action == 1) {
-        //     // WRITE
-        //     get_timestamp(stdout, rank, "WRITE");
+        } else if (random_action == 1) {
+            // WRITE
+            printf("%d/%d: Want WRITE\n", rank, num_threads);
+            sleep(1);
+            send_recv_quorum(
+                    "WRITE",
+                    rank,
+                    num_threads,
+                    REQ_recv_buf,
+                    REQ_requests,
+                    REQ_statuses
+                    );
         } else {
             // IDLE
-            get_timestamp(stdout, rank, "IDLE");
+            printf("%d/%d: IDLE\n", rank, num_threads);
+            int RETURN_BACK_recv_buf{};
+            MPI_Request RETURN_BACK_request{};
+            MPI_Status RETURN_BACK_status{};
+            int vote_for_write = 0;
+
+            int idle_iteration = 0;
             while (true) {
+                // If vote == 0, try return back vote
+                // And update version if file was written
+                if (!vote) {
+                    int response_received = 0;
+                    MPI_Test(&RETURN_BACK_request, &response_received,
+                             &RETURN_BACK_status);
+                    if (response_received) {
+                        vote = 1;
+                        if (vote_for_write) {
+                            file_version++;
+                        }
+                    }
+                }
+
+                // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // Endless IDLE protection (MAYBE NOT WORK)
+                if (idle_iteration > 0 && vote) {
+                    break;
+                }
+                idle_iteration++;
+
                 int any_req_received = 0;
                 int index;
                 MPI_Testany(REQ_requests.size(), &REQ_requests.front(), &index,
                             &any_req_received, &REQ_statuses.front());
                 if (!any_req_received) {
-                    // printf("%d/%d: New cycle\n", rank, num_threads);
                     continue;
                 } else {
-                    // TODO, Maybe BSend?
-                    int send_buf[2] = {RespType::ACCEPT, file_version};
-                    printf("%d/%d: REQ from %d is OK\n", rank, num_threads, index);
-                    MPI_Send(&send_buf, 2, MPI_INT, index,
-                             MsgType::RESP, MPI_COMM_WORLD);
+                    if (vote) {
+                        vote = 0;
+                        if (REQ_recv_buf[index] == ReqType::READ) {
+                            vote_for_write = 0;
+                        } else {
+                            vote_for_write = 1;
+                        }
+                        MPI_Irecv(&RETURN_BACK_recv_buf, 1, MPI_INT,
+                                  index, MsgType::RETURN_BACK, MPI_COMM_WORLD,
+                                  &RETURN_BACK_request);
+                        int send_buf[2] = {RespType::ACCEPT, file_version};
+                        MPI_Send(&send_buf, 2, MPI_INT,
+                                 index, MsgType::RESP, MPI_COMM_WORLD);
+                        printf("%d/%d: REQ from %d. ACCEPT\n",
+                               rank, num_threads, index);
+                    } else {
+                        int send_buf[2] = {RespType::REJECT, file_version};
+                        MPI_Send(&send_buf, 2, MPI_INT,
+                                 index, MsgType::RESP, MPI_COMM_WORLD);
+                        printf("%d/%d: REQ from %d. REJECT\n",
+                               rank, num_threads, index);
+
+                    }
                     MPI_Irecv(&REQ_recv_buf[index], 1, MPI_INT,
                               index, MsgType::REQ, MPI_COMM_WORLD,
                               &REQ_requests[index]);
@@ -243,21 +356,14 @@ int main(void) {
             }
         }
         MPI_Barrier(MPI_COMM_WORLD);
-        // iteration++;
     }
 
-    // printf("Proc: %d, Rand: %d\n", rank, rand() % 100);
-    // fflush(stdout);
-
-    // sleep(rand() % 5);
     MPI_Barrier(MPI_COMM_WORLD);
-    get_timestamp(stdout, rank, "END");
-
-
-    // Close file
-    // fclose(out_file);
 
     // Finalize MPI
     MPI_Finalize();
     return 0;
 }
+
+    // if (DEBUG >= 5)
+    //     printf("%d/%d:", rank, num_threads);

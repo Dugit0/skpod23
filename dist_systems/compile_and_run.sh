@@ -8,7 +8,7 @@ function cmcmpi() {
 }
 
 echo "======== COMPILE ========" &&
-mpic++ -Wall -Wextra -o main.out main.cpp &&
+mpic++ -Wall -Wextra -std=c++23 -o main.out main.cpp &&
 # cmcmpi main.c &&
 echo "========== RUN ==========" &&
 mpirun -np 5 --use-hwthread-cpus ./main.out
