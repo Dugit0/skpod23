@@ -57,7 +57,7 @@ Info *init_metadata() {
         res[i].len.i = res[i].end.i - res[i].beg.i + 1;
         res[i].len.j = res[i].end.j - res[i].beg.j + 1;
         res[i].len.k = res[i].end.k - res[i].beg.k + 1;
-        
+
         int buf;
         // Send to
         buf = (i / (M*M) + 1) * (M*M) + (i % (M*M));
@@ -65,13 +65,13 @@ Info *init_metadata() {
             buf = -1;
         }
         res[i].send_to.i = buf;
-        
+
         buf = i / (M*M) * (M*M) + (i % (M*M) / M + 1) * M + (i % M);
         if (i % (M*M) / M + 1 >= M) {
             buf = -1;
         }
         res[i].send_to.j = buf;
-        
+
         buf = (i / M * M) + (i % M + 1);
         if (i % M + 1 >= M) {
             buf = -1;
@@ -90,20 +90,20 @@ Info *init_metadata() {
             buf = -1;
         }
         res[i].recv_from.j = buf;
-        
+
         buf = (i / M * M) + (i % M - 1);
         if (i % M - 1 < 0) {
             buf = -1;
         }
         res[i].recv_from.k = buf;
     }
-    
+
     return res;
 }
 
 
 double ***init(Info info) {
-    
+
     double ***res = calloc(info.len.i, sizeof(*res));
 
     for (int i = 0; i < info.len.i; i++) {
@@ -139,7 +139,7 @@ void free_cube(Info info) {
 
 
 double relax(Info info) {
-    
+
     // Отправка в предыдущий для вычислений в нем
     // по оси i
     if (info.recv_from.i != -1) {
@@ -206,15 +206,15 @@ double relax(Info info) {
     int real_len_i = (info.recv_from.i == -1) ? info.len.i : (info.len.i + 1);
     int real_len_j = (info.recv_from.j == -1) ? info.len.j : (info.len.j + 1);
     int real_len_k = (info.recv_from.k == -1) ? info.len.k : (info.len.k + 1);
-    
+
     real_len_i = (info.send_to.i == -1) ? real_len_i : (real_len_i + 1);
     real_len_j = (info.send_to.j == -1) ? real_len_j : (real_len_j + 1);
     real_len_k = (info.send_to.k == -1) ? real_len_k : (real_len_k + 1);
-    
+
     // Выделение рабочего буфера
     if (debug >= 5)
         printf("%d/%d: Alloc work buf\n", rank, num_threads);
-    
+
     double ***work_buf = calloc(real_len_i, sizeof(*work_buf));
     for (int i = 0; i < real_len_i; i++) {
         work_buf[i] = calloc(real_len_j, sizeof(*(work_buf[i])));
@@ -222,7 +222,7 @@ double relax(Info info) {
             work_buf[i][j] = calloc(real_len_k, sizeof(*(work_buf[i][j])));
         }
     }
-   
+
     // Получение из последующих невычисленных
     // по оси k
     if (debug >= 5)
@@ -401,7 +401,7 @@ double relax(Info info) {
             }
         }
     }
-    
+
     // Релаксация
     if (debug >= 5)
         printf("%d/%d: Relax\n", rank, num_threads);
@@ -444,7 +444,7 @@ double relax(Info info) {
         free(work_buf[i]);
     }
     free(work_buf);
-    
+
     // Отправка в последующий вычисленного
     // по оси k
     if (info.send_to.k != -1) {
@@ -506,21 +506,21 @@ double relax(Info info) {
                 MPI_COMM_WORLD, &status);
         free(send_buf);
     }
-    
+
     return local_eps;
 }
 
 // void relax()
 // {
 
-//     for (i = 1; i <= N - 2; i++) { 
+//     for (i = 1; i <= N - 2; i++) {
 //         for (j = 1; j <= N - 2; j++) {
 //             for (k = 1; k <= N - 2; k++) {
 //                 double e;
 //                 e = A[i][j][k];
 //                 A[i][j][k] = (A[i-1][j][k] + A[i+1][j][k] + A[i][j-1][k] + A[i][j+1][k] + A[i][j][k-1] + A[i][j][k+1]) / 6.;
 //                 eps=Max(eps, fabs(e - A[i][j][k]));
-//             }    
+//             }
 //         }
 //     }
 // }
@@ -554,7 +554,7 @@ int main(int argc, char **argv) {
     // num_threads = 8;
 
     int status = MPI_Init(&argc, &argv);
-    if (status) { 
+    if (status) {
         printf("MPI not supported\nError with code %d\n", status);
         MPI_Abort(MPI_COMM_WORLD, status);
         return status;
@@ -566,9 +566,9 @@ int main(int argc, char **argv) {
         printf("Created %d/%d\n", rank, num_threads);
     MPI_Barrier(MPI_COMM_WORLD);
 
-    N = 300;
+    N = 120;
     // Нужно вычислять m(N, num_threads)!!!
-    m = 150;
+    m = 60;
     M = (N + m - 1) / m;
     // for (int cur_m = 0; cur_m <= N; cur_m++) {
     //     int cur_M = (N + cur_m - 1) / cur_m;
@@ -583,7 +583,7 @@ int main(int argc, char **argv) {
             printf("N = %d, m = %d, M = %d\n", N, m, M);
     }
     Info *metadata = init_metadata();
-    
+
     if (rank == 0) {
         if (debug >= 1)
             print_metadata(metadata);
@@ -608,7 +608,7 @@ int main(int argc, char **argv) {
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
-    
+
     for (int it = 1; it <= itmax; it++) {
         eps = 0.;
         double proc_eps = 0.;
@@ -636,20 +636,26 @@ int main(int argc, char **argv) {
     MPI_Barrier(MPI_COMM_WORLD);
     if (rank == 0) {
         end = MPI_Wtime();
-        // printf("check_sum = %lf\n", check_sum);
+        printf("eps = %f\n", eps);
+        printf("check_sum = %lf\n", check_sum);
         printf("Time = %f, num_threads = %d\n", end - start, num_threads);
     }
     for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_threads) {
         free_cube(metadata[cur_cube]);
     }
     free(nums_cubes);
-    
+
     free(metadata);
     MPI_Finalize();
 
     return 0;
 }
 
+/*
+ eps = 4.132679
+check_sum = 1732922063.053946
+Time = 53.307923, num_threads = 8
+*/
 
 
 
@@ -699,7 +705,7 @@ void print_metadata(Info *metadata) {
         }
         printf("===========\n");
     }
-    
+
     printf("\nCubes:\n");
     for (int i = 0; i < M; i++) {
         for (int j = 0; j < M; j++) {
@@ -722,7 +728,7 @@ void print_metadata(Info *metadata) {
         }
         printf("===========\n");
     }
-    
+
     printf("\nSend to:\n");
     for (int i = 0; i < M; i++) {
         for (int j = 0; j < M; j++) {
@@ -747,6 +753,3 @@ void print_metadata(Info *metadata) {
         printf("===========\n");
     }
 }
-
-
-
