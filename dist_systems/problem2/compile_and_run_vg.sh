@@ -10,7 +10,7 @@ set -e
 echo "====== COMPILE dist_syst_mpi.cpp ======"
 mpic++ -Wall -Wextra -std=c++23 -o dist_syst_mpi.out dist_syst_mpi.cpp
 echo "======== RUN dist_syst_mpi.cpp ========"
-mpirun -np 10 --use-hwthread-cpus --with-ft ulfm ./dist_syst_mpi.out
-# mpirun -np 10 --use-hwthread-cpus --with-ft ulfm valgrind --suppressions=/usr/local/share/openmpi/openmpi-valgrind.supp ./dist_syst_mpi.out
+# mpirun -np 10 --use-hwthread-cpus --with-ft ulfm ./dist_syst_mpi.out
+mpirun -np 10 --use-hwthread-cpus --with-ft ulfm valgrind --suppressions=/usr/local/share/openmpi/openmpi-valgrind.supp ./dist_syst_mpi.out
 
 # echo "============ ============"
