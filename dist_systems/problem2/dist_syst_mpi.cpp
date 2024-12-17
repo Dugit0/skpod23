@@ -126,6 +126,7 @@ Info *init_metadata() {
 
 double ***init(Info info) {
 
+    printf("%d/%d: Start init\n", rank, num_threads);
     double ***res = (double ***) calloc(info.len.i, sizeof(*res));
 
     for (int i = 0; i < info.len.i; i++) {
@@ -145,6 +146,7 @@ double ***init(Info info) {
             }
         }
     }
+    printf("%d/%d: Finish init\n", rank, num_threads);
     return res;
 }
 
@@ -619,26 +621,38 @@ void make_backup(Info info) {
 }
 
 
+// void load_backup(Info* metadata) {
+
+
 void load_backup() {
     printf("%d/%d: Try load backup\n", rank, num_threads);
-    std::string filename = "backups/" + std::to_string(rank) + ".mpi";
-    std::FILE* file = std::fopen(filename.c_str(), "r");
-    printf("%d/%d: Open backup file\n", rank, num_threads);
-    for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
-        Info& info = metadata[cur_cube];
-        printf("%d/%d: Try init cube\n", rank, num_threads);
-        info.cube = init(info);
-        printf("%d/%d: Init cube\n", rank, num_threads);
-        for (int i = 0; i < info.len.i; i++) {
-            for (int j = 0; j < info.len.j; j++) {
-                for (int k = 0; k < info.len.k; k++) {
-                    fscanf(file, "%lf ", &(info.cube[i][j][k]));
-                }
-            }
-        }
-        printf("%d/%d: Load cube\n", rank, num_threads);
-    }
-    std::fclose(file);
+    printf("%d/%d: metadata = %p\n", rank, num_threads, metadata);
+
+
+    // std::string filename = "backups/" + std::to_string(rank) + ".mpi";
+    // std::FILE* file = std::fopen(filename.c_str(), "r");
+    // // printf("%d/%d: Open backup file %p\n", rank, num_threads, file);
+    // for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
+    //     printf("%d/%d: Try get metadata = %p\n", rank, num_threads, metadata);
+    //     Info info = metadata[cur_cube];
+    //     printf("%d/%d: Try init cube\n", rank, num_threads);
+    //     info.cube = init(info);
+    //     printf("%d/%d: Init cube\n", rank, num_threads);
+    //     for (int i = 0; i < info.len.i; i++) {
+    //         for (int j = 0; j < info.len.j; j++) {
+    //             for (int k = 0; k < info.len.k; k++) {
+    //                 // printf("%d/%d: Try write %d %d %d\n",
+    //                 //         rank, num_threads, i, j, k);
+    //                 info.cube[i][j][k] = 0;
+    //                 // fscanf(file, "%lf ", &(info.cube[i][j][k]));
+    //             }
+    //         }
+    //     }
+    //     printf("%d/%d: Load cube\n", rank, num_threads);
+    // }
+    // std::fclose(file);
+
+
     // MPI_File file;
     // MPI_File_open(MPI_COMM_SELF, filename.c_str(),
     //         MPI_MODE_RDONLY, MPI_INFO_NULL, &file);
@@ -717,6 +731,7 @@ int main(int argc, char **argv) {
     MPI_Barrier(comm_world);
 
     for (int it = 1; it <= itmax; it++) {
+        usleep(1000);
         try {
             if (!breakdowns[break_number].flag
                     && rank == breakdowns[break_number].rank
@@ -749,6 +764,7 @@ int main(int argc, char **argv) {
             }
         } catch (int error) {
             it--;
+            printf("%d/%d: metadata = %p\n", rank, num_threads, metadata);
             load_backup();
             MPI_Barrier(comm_world);
         }
