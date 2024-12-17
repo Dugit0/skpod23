@@ -3,8 +3,11 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <cstdio>
 #include <unistd.h>
 #include <signal.h>
+
+#include <string>
 #include <limits>
 
 #define Max(a, b) (((a) > (b)) ? (a) : (b))
@@ -57,7 +60,7 @@ Info *metadata;
 enum {
     BACKUP_SIZE = 2
 };
-ErrorImitation breakdowns[BACKUP_SIZE] = {{0, 100, 3}, {0, 100, 7}};
+ErrorImitation breakdowns[BACKUP_SIZE] = {{0, 2, 3}, {0, 100, 7}};
 int num_hot_threads;
 int break_number = 0;
 MPI_Comm comm_world;
@@ -568,8 +571,7 @@ void print_info(Info i);
 void print_metadata(Info *metadata);
 
 
-static void error_handler_function(MPI_Comm* comm, int* err, ...) {
-
+static void error_handler_function(MPI_Comm*, int*, ...) {
     breakdowns[break_number].flag = 1;
     break_number++;
     int old_rank = rank;
@@ -587,6 +589,73 @@ static void error_handler_function(MPI_Comm* comm, int* err, ...) {
 }
 
 
+void make_backup(Info info) {
+    std::string filename = "backups/" + std::to_string(rank) + ".mpi";
+    std::FILE* file = std::fopen(filename.c_str(), "w");
+    for (int i = 0; i < info.len.i; i++) {
+        for (int j = 0; j < info.len.j; j++) {
+            for (int k = 0; k < info.len.k; k++) {
+                fprintf(file, "%lf ", info.cube[i][j][k]);
+            }
+        }
+    }
+    std::fclose(file);
+    // MPI_File file;
+    // MPI_File_open(MPI_COMM_SELF, filename.c_str(),
+    //         MPI_MODE_CREATE | MPI_MODE_WRONLY, MPI_INFO_NULL, &file);
+    // for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
+    //     Info& info = metadata[cur_cube];
+    //     for (int i = 0; i < info.len.i; i++) {
+    //         for (int j = 0; j < info.len.j; j++) {
+    //             for (int k = 0; k < info.len.k; k++) {
+    //                 MPI_Status status;
+    //                 MPI_File_write(file, &info.cube[i][j][k], 1, MPI_DOUBLE, &status);
+    //             }
+    //         }
+    //     }
+    // }
+    // MPI_File_close(&file);
+    return;
+}
+
+
+void load_backup() {
+    printf("%d/%d: Try load backup\n", rank, num_threads);
+    std::string filename = "backups/" + std::to_string(rank) + ".mpi";
+    std::FILE* file = std::fopen(filename.c_str(), "r");
+    printf("%d/%d: Open backup file\n", rank, num_threads);
+    for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
+        Info& info = metadata[cur_cube];
+        printf("%d/%d: Try init cube\n", rank, num_threads);
+        info.cube = init(info);
+        printf("%d/%d: Init cube\n", rank, num_threads);
+        for (int i = 0; i < info.len.i; i++) {
+            for (int j = 0; j < info.len.j; j++) {
+                for (int k = 0; k < info.len.k; k++) {
+                    fscanf(file, "%lf ", &(info.cube[i][j][k]));
+                }
+            }
+        }
+        printf("%d/%d: Load cube\n", rank, num_threads);
+    }
+    std::fclose(file);
+    // MPI_File file;
+    // MPI_File_open(MPI_COMM_SELF, filename.c_str(),
+    //         MPI_MODE_RDONLY, MPI_INFO_NULL, &file);
+    // for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
+    //     Info& info = metadata[cur_cube];
+    //     for (int i = 0; i < info.len.i; i++) {
+    //         for (int j = 0; j < info.len.j; j++) {
+    //             for (int k = 0; k < info.len.k; k++) {
+    //                 MPI_Status status;
+    //                 MPI_File_read(file, &info.cube[i][j][k], 1, MPI_DOUBLE, &status);
+    //             }
+    //         }
+    //     }
+    // }
+    // MPI_File_close(&file);
+    return;
+}
 
 
 
@@ -606,6 +675,7 @@ int main(int argc, char **argv) {
     // Error handler
     MPI_Errhandler error_handler;
     MPI_Comm_create_errhandler(error_handler_function, &error_handler);
+    MPI_Comm_set_errhandler(comm_world, error_handler);
 
     if (debug >= 5)
         printf("Created %d/%d\n", rank, num_threads);
@@ -647,7 +717,6 @@ int main(int argc, char **argv) {
     MPI_Barrier(comm_world);
 
     for (int it = 1; it <= itmax; it++) {
-        // printf("%d/%d: it = %d\n", rank, num_threads, it);
         try {
             if (!breakdowns[break_number].flag
                     && rank == breakdowns[break_number].rank
@@ -658,34 +727,29 @@ int main(int argc, char **argv) {
                 eps = 0.;
                 double proc_eps = 0.;
                 for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
-                    // printf("%d/%d: cur_cube = %d\n", rank, num_threads, cur_cube);
                     double cur_cube_eps = relax(metadata[cur_cube]);
                     proc_eps = Max(proc_eps, cur_cube_eps);
+                    make_backup(metadata[cur_cube]);
                 }
                 MPI_Barrier(comm_world);
-                // printf("%d/%d: First barrier\n", rank, num_threads);
                 MPI_Allreduce(&proc_eps, &eps, 1, MPI_DOUBLE, MPI_MAX, comm_world);
-                // printf("%d/%d: Allreduce\n", rank, num_threads);
                 MPI_Barrier(comm_world);
-                // printf("%d/%d: Second barrier\n", rank, num_threads);
-                if (rank == 0) {
-                    printf("eps = %f\n", eps);
-                }
+                // if (rank == 0) {
+                //     printf("eps = %f\n", eps);
+                // }
                 if (eps < maxeps) {
                     break;
                 }
             } else {
                 MPI_Barrier(comm_world);
-                // printf("%d/%d: First barrier\n", rank, num_threads);
                 eps = 0.;
                 double proc_eps = std::numeric_limits<double>::min();
                 MPI_Allreduce(&proc_eps, &eps, 1, MPI_DOUBLE, MPI_MAX, comm_world);
-                // printf("%d/%d: Allreduce\n", rank, num_threads);
                 MPI_Barrier(comm_world);
-                // printf("%d/%d: Second barrier\n", rank, num_threads);
             }
         } catch (int error) {
             it--;
+            load_backup();
             MPI_Barrier(comm_world);
         }
     }
