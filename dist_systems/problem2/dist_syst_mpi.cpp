@@ -54,16 +54,21 @@ double maxeps = 0.1e-7;
 int itmax = 100;
 double check_sum = 0.;
 double eps = 0;
-int rank, num_threads;
+int old_rank, rank, num_threads;
 Info *metadata;
 
 enum {
     BACKUP_SIZE = 2
 };
-ErrorImitation breakdowns[BACKUP_SIZE] = {{0, 2, 3}, {0, 100, 7}};
+ErrorImitation breakdowns[BACKUP_SIZE] = {{0, 2, 3}, {0, 5, 7}};
 int num_hot_threads;
 int break_number = 0;
 MPI_Comm comm_world;
+
+void print_cube(Info info);
+void print_info(Info i);
+void print_metadata(Info *metadata);
+
 
 
 Info *init_metadata() {
@@ -79,6 +84,7 @@ Info *init_metadata() {
         res[i].len.i = res[i].end.i - res[i].beg.i + 1;
         res[i].len.j = res[i].end.j - res[i].beg.j + 1;
         res[i].len.k = res[i].end.k - res[i].beg.k + 1;
+        res[i].cube = NULL;
 
         int buf;
         // Send to
@@ -126,7 +132,6 @@ Info *init_metadata() {
 
 double ***init(Info info) {
 
-    printf("%d/%d: Start init\n", rank, num_threads);
     double ***res = (double ***) calloc(info.len.i, sizeof(*res));
 
     for (int i = 0; i < info.len.i; i++) {
@@ -146,7 +151,6 @@ double ***init(Info info) {
             }
         }
     }
-    printf("%d/%d: Finish init\n", rank, num_threads);
     return res;
 }
 
@@ -164,6 +168,15 @@ void free_cube(Info info) {
 
 double relax(Info info) {
 
+    // ////////// DEBUG //////////
+    // for (int i = 0; i < info.len.i; i++) {
+    //     for (int j = 0; j < info.len.j; j++) {
+    //         if (!info.cube[i][j]) {
+    //             printf("%d/%d: %p in %d %d\n", rank, num_threads, info.cube[i][j], i, j);
+    //         }
+    //     }
+    // }
+    // ////////// DEBUG //////////
     // Отправка в предыдущий для вычислений в нем
     // по оси i
     if (info.recv_from.i != -1) {
@@ -568,15 +581,10 @@ double verify(Info info) {
 }
 
 
-void print_cube(Info info);
-void print_info(Info i);
-void print_metadata(Info *metadata);
-
-
 static void error_handler_function(MPI_Comm*, int*, ...) {
     breakdowns[break_number].flag = 1;
     break_number++;
-    int old_rank = rank;
+    old_rank = rank;
 
     MPIX_Comm_revoke(comm_world);
     MPIX_Comm_shrink(comm_world, &comm_world);
@@ -591,83 +599,92 @@ static void error_handler_function(MPI_Comm*, int*, ...) {
 }
 
 
-void make_backup(Info info) {
+void init_backup() {
+    // std::string filename = "backups/" + std::to_string(rank) + ".mpi";
+    // std::FILE* file = std::fopen(filename.c_str(), "w");
+    // std::fclose(file);
+
     std::string filename = "backups/" + std::to_string(rank) + ".mpi";
-    std::FILE* file = std::fopen(filename.c_str(), "w");
-    for (int i = 0; i < info.len.i; i++) {
-        for (int j = 0; j < info.len.j; j++) {
-            for (int k = 0; k < info.len.k; k++) {
-                fprintf(file, "%lf ", info.cube[i][j][k]);
-            }
-        }
-    }
-    std::fclose(file);
-    // MPI_File file;
-    // MPI_File_open(MPI_COMM_SELF, filename.c_str(),
-    //         MPI_MODE_CREATE | MPI_MODE_WRONLY, MPI_INFO_NULL, &file);
+    MPI_File file;
+    MPI_File_open(MPI_COMM_SELF, filename.c_str(),
+            MPI_MODE_CREATE | MPI_MODE_WRONLY, MPI_INFO_NULL, &file);
+    MPI_File_close(&file);
+    MPI_File_delete(filename.c_str(), MPI_INFO_NULL);
+    MPI_File_open(MPI_COMM_SELF, filename.c_str(),
+            MPI_MODE_CREATE | MPI_MODE_WRONLY, MPI_INFO_NULL, &file);
+    MPI_File_close(&file);
+}
+
+
+void make_backup() {
+    // std::string filename = "backups/" + std::to_string(rank) + ".mpi";
+    // std::FILE* file = std::fopen(filename.c_str(), "a");
     // for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
     //     Info& info = metadata[cur_cube];
     //     for (int i = 0; i < info.len.i; i++) {
     //         for (int j = 0; j < info.len.j; j++) {
     //             for (int k = 0; k < info.len.k; k++) {
-    //                 MPI_Status status;
-    //                 MPI_File_write(file, &info.cube[i][j][k], 1, MPI_DOUBLE, &status);
+    //                 fprintf(file, "%lf ", info.cube[i][j][k]);
     //             }
     //         }
     //     }
     // }
-    // MPI_File_close(&file);
+    // std::fclose(file);
+
+    std::string filename = "backups/" + std::to_string(rank) + ".mpi";
+    MPI_File file;
+    MPI_File_open(MPI_COMM_SELF, filename.c_str(),
+            MPI_MODE_APPEND | MPI_MODE_WRONLY, MPI_INFO_NULL, &file);
+    for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
+        Info& info = metadata[cur_cube];
+        for (int i = 0; i < info.len.i; i++) {
+            for (int j = 0; j < info.len.j; j++) {
+                for (int k = 0; k < info.len.k; k++) {
+                    MPI_Status status;
+                    MPI_File_write(file, &(info.cube[i][j][k]), 1, MPI_DOUBLE, &status);
+                }
+            }
+        }
+    }
+    MPI_File_close(&file);
     return;
 }
 
 
-// void load_backup(Info* metadata) {
-
-
 void load_backup() {
-    printf("%d/%d: Try load backup\n", rank, num_threads);
-    printf("%d/%d: metadata = %p\n", rank, num_threads, metadata);
-
-
     // std::string filename = "backups/" + std::to_string(rank) + ".mpi";
     // std::FILE* file = std::fopen(filename.c_str(), "r");
-    // // printf("%d/%d: Open backup file %p\n", rank, num_threads, file);
+    // printf("%d/%d: Open backup file %p\n", rank, num_threads, file);
     // for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
-    //     printf("%d/%d: Try get metadata = %p\n", rank, num_threads, metadata);
-    //     Info info = metadata[cur_cube];
-    //     printf("%d/%d: Try init cube\n", rank, num_threads);
+    //     Info& info = metadata[cur_cube];
     //     info.cube = init(info);
-    //     printf("%d/%d: Init cube\n", rank, num_threads);
     //     for (int i = 0; i < info.len.i; i++) {
     //         for (int j = 0; j < info.len.j; j++) {
     //             for (int k = 0; k < info.len.k; k++) {
-    //                 // printf("%d/%d: Try write %d %d %d\n",
-    //                 //         rank, num_threads, i, j, k);
-    //                 info.cube[i][j][k] = 0;
-    //                 // fscanf(file, "%lf ", &(info.cube[i][j][k]));
+    //                 fscanf(file, "%lf ", &(info.cube[i][j][k]));
     //             }
     //         }
     //     }
-    //     printf("%d/%d: Load cube\n", rank, num_threads);
     // }
     // std::fclose(file);
 
-
-    // MPI_File file;
-    // MPI_File_open(MPI_COMM_SELF, filename.c_str(),
-    //         MPI_MODE_RDONLY, MPI_INFO_NULL, &file);
-    // for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
-    //     Info& info = metadata[cur_cube];
-    //     for (int i = 0; i < info.len.i; i++) {
-    //         for (int j = 0; j < info.len.j; j++) {
-    //             for (int k = 0; k < info.len.k; k++) {
-    //                 MPI_Status status;
-    //                 MPI_File_read(file, &info.cube[i][j][k], 1, MPI_DOUBLE, &status);
-    //             }
-    //         }
-    //     }
-    // }
-    // MPI_File_close(&file);
+    std::string filename = "backups/" + std::to_string(rank) + ".mpi";
+    MPI_File file;
+    MPI_File_open(MPI_COMM_SELF, filename.c_str(),
+            MPI_MODE_RDONLY, MPI_INFO_NULL, &file);
+    for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
+        Info& info = metadata[cur_cube];
+        info.cube = init(info);
+        for (int i = 0; i < info.len.i; i++) {
+            for (int j = 0; j < info.len.j; j++) {
+                for (int k = 0; k < info.len.k; k++) {
+                    MPI_Status status;
+                    MPI_File_read(file, &(info.cube[i][j][k]), 1, MPI_DOUBLE, &status);
+                }
+            }
+        }
+    }
+    MPI_File_close(&file);
     return;
 }
 
@@ -705,7 +722,7 @@ int main(int argc, char **argv) {
         if (debug >= 1)
             printf("N = %d, m = %d, M = %d\n", N, m, M);
     }
-    Info *metadata = init_metadata();
+    metadata = init_metadata();
 
     if (rank == 0) {
         if (debug >= 1)
@@ -718,20 +735,16 @@ int main(int argc, char **argv) {
         start = MPI_Wtime();
     }
 
-    int len_cubes = (M*M*M - rank) / num_hot_threads + 1;
-    int *nums_cubes = (int *) calloc(len_cubes, sizeof(*nums_cubes));  // Зачем???
-
-    int tmp_ind;
-    tmp_ind = 0;
-    for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
-        nums_cubes[tmp_ind] = cur_cube;
-        metadata[cur_cube].cube = init(metadata[cur_cube]);
+    if (rank < num_hot_threads) {
+        for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
+            metadata[cur_cube].cube = init(metadata[cur_cube]);
+        }
+        init_backup();
     }
 
     MPI_Barrier(comm_world);
 
     for (int it = 1; it <= itmax; it++) {
-        usleep(1000);
         try {
             if (!breakdowns[break_number].flag
                     && rank == breakdowns[break_number].rank
@@ -744,14 +757,16 @@ int main(int argc, char **argv) {
                 for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
                     double cur_cube_eps = relax(metadata[cur_cube]);
                     proc_eps = Max(proc_eps, cur_cube_eps);
-                    make_backup(metadata[cur_cube]);
                 }
                 MPI_Barrier(comm_world);
                 MPI_Allreduce(&proc_eps, &eps, 1, MPI_DOUBLE, MPI_MAX, comm_world);
                 MPI_Barrier(comm_world);
-                // if (rank == 0) {
-                //     printf("eps = %f\n", eps);
-                // }
+                init_backup();
+                make_backup();
+                MPI_Barrier(comm_world);
+                if (rank == 0) {
+                    printf("eps = %f\n", eps);
+                }
                 if (eps < maxeps) {
                     break;
                 }
@@ -761,11 +776,18 @@ int main(int argc, char **argv) {
                 double proc_eps = std::numeric_limits<double>::min();
                 MPI_Allreduce(&proc_eps, &eps, 1, MPI_DOUBLE, MPI_MAX, comm_world);
                 MPI_Barrier(comm_world);
+                MPI_Barrier(comm_world);
             }
         } catch (int error) {
+            if (old_rank < num_hot_threads) {
+                for (int cur_cube = old_rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
+                    free_cube(metadata[cur_cube]);
+                }
+            }
+            if (rank < num_hot_threads) {
+                load_backup();
+            }
             it--;
-            printf("%d/%d: metadata = %p\n", rank, num_threads, metadata);
-            load_backup();
             MPI_Barrier(comm_world);
         }
     }
@@ -786,7 +808,6 @@ int main(int argc, char **argv) {
     for (int cur_cube = rank; cur_cube < M*M*M; cur_cube += num_hot_threads) {
         free_cube(metadata[cur_cube]);
     }
-    free(nums_cubes);
 
     free(metadata);
     MPI_Finalize();
@@ -813,7 +834,8 @@ void print_cube(Info info) {
 
 
 void print_info(Info i) {
-    printf("rank = %d, begin = (%d %d %d), end = (%d %d %d)\nsend_to = (%d %d %d), recv_from = (%d %d %d)\n",
+    printf("%d/%d:\nrank = %d, begin = (%d %d %d), end = (%d %d %d)\nsend_to = (%d %d %d), recv_from = (%d %d %d)\n",
+            rank, num_threads,
             i.proc_rank,
             i.beg.i, i.beg.j, i.beg.k,
             i.end.i, i.end.j, i.end.k,
