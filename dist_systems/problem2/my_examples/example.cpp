@@ -20,6 +20,7 @@ enum {
 ErrorImitation breakdowns[BACKUP_SIZE] = {{0, 2, 3}, {0, 1, 7}};
 int break_number = 0;
 int rank, size, hot_size;
+int* global_pointer;
 MPI_Comm comm_world;
 
 static void verbose_errhandler(MPI_Comm* comm, int* err, ...) {
